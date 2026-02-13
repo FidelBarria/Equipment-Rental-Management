@@ -1,0 +1,19 @@
+<%= form_with model: @client do |form|%>
+    <%= form.label :name%>
+    <%= form.text_field :name%>
+
+    <%= form.label :cpf_cnpj%>
+    <%= form.text_field :cpf_cnpj%>
+
+    <%= form.label :email%>
+    <%= form.text_field :email%>
+
+    <%= form.label :adress%>
+    <%= form.text_field :adress%>
+
+    <%= form.label :phone%>
+    <%= form.text_field :phone%>
+
+    <%= form.submit%>
+
+<%end%>

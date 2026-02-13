@@ -1,0 +1,26 @@
+<h1>Clients</h1>
+
+<%= link_to "New Clients", new_client_path%>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>CPF/CNPJ</td>
+            <td>Email</td>
+            <td>Adress</td>
+            <td>Phone</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% @clients.each do |client|%>
+        <tr>
+            <td><%= client.name%></td>
+            <td><%= client.cpf_cnpj%></td>
+            <td><%= client.email%></td>
+            <td><%= client.adress%></td>
+            <td><%= client.phone%></td>
+        </tr>
+        <%end%>
+    </tbody>
+</table>

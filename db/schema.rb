@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_13_142538) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_13_192807) do
   create_table "categories", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "description"
     t.string "name"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string "address"
+    t.string "cpf_cnpj"
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.string "name"
+    t.string "phone"
     t.datetime "updated_at", null: false
   end
 
@@ -36,6 +46,38 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_13_142538) do
     t.string "name"
     t.date "start_date"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.decimal "amount"
+    t.datetime "created_at", null: false
+    t.date "payment_date"
+    t.integer "payment_method"
+    t.integer "rental_id"
+    t.integer "status"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rental_items", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.decimal "daily_price"
+    t.integer "equipment_id"
+    t.integer "quantity"
+    t.integer "rental_id"
+    t.decimal "subtotal"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rentals", force: :cascade do |t|
+    t.integer "client_id"
+    t.datetime "created_at", null: false
+    t.date "end_date"
+    t.integer "event_id"
+    t.date "start_date"
+    t.integer "status"
+    t.decimal "total_value"
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
