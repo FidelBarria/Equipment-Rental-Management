@@ -1,0 +1,48 @@
+<h1>Rental Details for <%= @rental.event.name %></h1>
+
+<div>
+    <div>
+        <p><strong>Client:</strong> <%= @rental.client.name %></p>
+        <p><strong>Event:</strong> <%= @rental.event.name %></p>
+        <p><strong>Rental Date:</strong> <%= @rental.start_date.strftime("%d/%m/%Y") %></p>
+        <p><strong>Return Date:</strong> <%= @rental.end_date.strftime("%d/%m/%Y") %></p>
+        <p><strong>User:</strong> <%= @rental.user.name %></p>
+        <p><strong>Total Value:</strong> <%= @rental.total_value %></p>
+        <p><strong>Status:</strong> <%= @rental.status.humanize %></p>
+        <hr>
+    </div>
+    <div>
+        <h2>Payments</h2>
+        <% if @rental.payments.any? %>
+            <% @rental.payments.each do |payment| %>
+                <p><strong>Status:</strong> <%= payment.status.humanize %></p>
+                <p><strong>Amount:</strong> <%= payment.amount %></p>
+                <p><strong>Payment Date:</strong> <%= payment.payment_date.strftime("%d/%m/%Y") %></p>
+                <p><strong>Payment Method:</strong> <%= payment.payment_method.humanize %></p>
+                <hr>
+            <% end %>
+        <% else %>
+            <p>No payments recorded.</p>
+        <% end %>
+    </div>
+</div>
+<h2>Rented Items</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Item</td>
+            <td>Quantity</td>
+            <td>Unit Price</td>
+            <td>Total Price</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% @rental.rental_items.each do |rental_item| %>
+        <tr>
+            <td><%= rental_item.equipment.name %></td>
+            <td><%= rental_item.quantity %></td>
+            <td><%= rental_item.daily_price %></td>
+            <td><%= rental_item.subtotal %></td>
+        </tr>
+        <% end %>
+    </tbody>

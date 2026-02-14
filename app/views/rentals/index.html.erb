@@ -1,0 +1,35 @@
+<h1>Rentals</h1>
+
+<%= link_to "New Rental", new_rental_path%>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Client</td>
+            <td>Event</td>
+            <td>Rental Date</td>
+            <td>Return Date</td>
+            <td>User</td>
+            <td>Total Value</td>
+            <td>Status</td>
+            <td>Actions</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% @rentals.each do |rental|%>
+        <tr>
+            <td><%= rental.client.name%></td>
+            <td><%= rental.event.name%></td>
+            <td><%= rental.start_date.strftime("%d/%m/%Y") %></td>
+            <td><%= rental.end_date.strftime("%d/%m/%Y") %></td>
+            <td><%= rental.user.name%></td>
+            <td><%= rental.total_value %></td>
+            <td><%= rental.status.humanize %></td>
+            <td>
+                <%= link_to  "Details", rental_path(rental)%>
+                <%= link_to "Adicionar Items", new_rental_rental_item_path(rental), class: "btn btn-success" %>
+                <%= link_to "Payment", new_rental_payment_path(rental)%>
+            </td>
+        </tr>
+        <%end%>
+    </tbody>

@@ -1,0 +1,36 @@
+<%= form_with(model: [@rental, @rental_item], local: true) do |form| %>
+  <% if @rental_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@rental_item.errors.count, "error") %> prohibited this rental item from being saved:</h2>
+      <ul>
+        <% @rental_item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :equipment_id %>
+    <%= form.collection_select :equipment_id, Equipment.all, :id, :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity, step: 1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :daily_price %>
+    <%= form.number_field :daily_price, value: Equipment.first.daily_value, step: 0.01 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :subtotal %>
+    <%= form.number_field :subtotal, step: 0.01 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Rental Item" %>
+  </div>
+<% end %>
