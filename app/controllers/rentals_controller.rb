@@ -1,6 +1,10 @@
 class RentalsController < ApplicationController
   def index
-    @rentals = Rental.all
+    if params[:status].present?
+      @rentals = Rental.by_status(params[:status])
+    else
+      @rentals = Rental.all
+    end
   end
 
   def show
@@ -20,11 +24,24 @@ class RentalsController < ApplicationController
     end
   end
 
+  def update
+    @rental = Rental.find(params[:id])
+
+    if @rental.update(rental_status_params)
+      redirect_to @rental, notice: "Status update confirmed."
+    else
+      render :show, status: :unprocessable_entity
+    end
+  end
+
   private
   def rental_item_params
   params.require(:rental_item).permit(:rental_id)
   end
 
+  def rental_status_params
+    params.require(:rental).permit(:status)
+  end
   def rental_params
     params.require(:rental).permit(:client_id, :event_id, :user_id, :start_date, :end_date, :total_value, :status)
   end

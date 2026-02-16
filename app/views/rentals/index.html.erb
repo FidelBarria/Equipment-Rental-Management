@@ -1,6 +1,13 @@
 <h1>Rentals</h1>
 
-<%= link_to "New Rental", new_rental_path%>
+<%=link_to "New Retal", new_rental_path%>
+
+<h4>Filter</h4>
+<%= link_to "All", rentals_path %>
+<%= link_to "Active", rentals_path(status: :active) %>
+<%= link_to "Pending", rentals_path(status: :pending) %>
+<%= link_to "Completed", rentals_path(status: :completed) %>
+<%= link_to "Cancelled", rentals_path(status: :cancelled) %>
 
 <table class="table">
     <thead>

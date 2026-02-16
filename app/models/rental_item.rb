@@ -2,31 +2,36 @@ class RentalItem < ApplicationRecord
   belongs_to :rental
   belongs_to :equipment
 
-  validate :check_equipment_availability, on: :create
+  validate :check_equipment_availability
 
-  after_save :update_rental_total_value, :update_quantity_in_equipment
-  after_destroy :update_rental_total_value, :restore_equipment_stock
+  after_save :update_rental_total_value, :update_equipment_status
+  after_destroy :update_rental_total_value
+
 
   private
 
-  def restore_equipment_stock
-    new_stock = equipment.quantity + self.quantity
-
-    equipment.update!(quantity: new_stock)
-  end
-
   def check_equipment_availability
-    # Verificamos se a quantidade pedida é maior do que a que temos em stock
-    if quantity > equipment.quantity
-      errors.add(:quantity, "is greater than available stock (#{equipment.quantity} left)")
-    end
-  end
+    return unless equipment.present?
 
-  def update_quantity_in_equipment
-    equipment.calculate_quantity_in_equipment!(quantity)
+    unless equipment.available? || equipment.pending?
+      errors.add(:base, "is not available for rental")
+    end
   end
 
   def update_rental_total_value
     rental.calculate_total_value!
+  end
+
+  def update_equipment_status
+    case rental.status
+    when "pending"
+      equipment.update(status: :pending)
+
+    when "active"
+      equipment.update(status: :unavailable)
+
+    when "completed", "cancelled"
+      equipment.update(status: :available)
+    end
   end
 end

@@ -1,7 +1,7 @@
 class Equipment < ApplicationRecord
   belongs_to :category
 
-  def calculate_quantity_in_equipment!(quantity_to_remove)
-    update!(quantity: quantity - quantity_to_remove)
-  end
+  enum :status, { available: 0, rented: 1, unavailable: 2, pending: 3 }, default: :available
+
+  scope :by_name, ->(term) { where("name LIKE ?", "%#{term}%") if term.present? }
 end

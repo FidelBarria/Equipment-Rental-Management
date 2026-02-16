@@ -3,8 +3,11 @@ class EquipmentController < ApplicationController
 
   # GET /equipment or /equipment.json
   def index
-    # @equipment = Equipment.includes(:category).all
-    @equipment = Equipment.all
+    if params[:query].present?
+      @equipment = Equipment.by_name(params[:query])
+    else
+      @equipment = Equipment.all
+    end
   end
 
   # GET /equipment/1 or /equipment/1.json

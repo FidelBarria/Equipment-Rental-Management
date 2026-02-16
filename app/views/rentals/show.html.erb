@@ -8,7 +8,11 @@
         <p><strong>Return Date:</strong> <%= @rental.end_date.strftime("%d/%m/%Y") %></p>
         <p><strong>User:</strong> <%= @rental.user.name %></p>
         <p><strong>Total Value:</strong> <%= @rental.total_value %></p>
-        <p><strong>Status:</strong> <%= @rental.status.humanize %></p>
+        <%= form_with(model: @rental) do |form|%>
+            <%= form.label :status%>
+            <%= form.select :status, Rental.statuses.keys.map { |status| [status.humanize, status]} %></p>
+            <%= form.submit "Editar Status"%>
+        <%end%>
         <hr>
     </div>
     <div>

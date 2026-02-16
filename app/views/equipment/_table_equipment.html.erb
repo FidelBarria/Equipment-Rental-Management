@@ -1,6 +1,7 @@
 <table class="table">
   <thead>
     <tr>
+        <th>ID Equipment</th>
         <th>Name</th>
         <th>Category</th>
         <th>Daily Value</th>
@@ -13,10 +14,11 @@
   <tbody>
     <% @equipment.each do |equipment| %>
       <tr>
+        <td><%= equipment.id %></td>
         <td><%= equipment.name %></td>
         <td><%= equipment.category.name %></td>
         <td><%= equipment.daily_value %></td>
-        <td><%= equipment.statu %></td>
+        <td><%= equipment.status&.humanize %></td>
         <td><%= equipment.quantity %></td> 
         <td><%= link_to "Details", equipment, class: "button-group" %></td>
       </tr>

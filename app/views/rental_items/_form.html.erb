@@ -1,21 +1,16 @@
-<%= form_with(model: [@rental, @rental_item], local: true) do |form| %>
-  <% if @rental_item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@rental_item.errors.count, "error") %> prohibited this rental item from being saved:</h2>
-      <ul>
-        <% @rental_item.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  
-
   <div class="field">
   <h2>Item Selecionado:</h2>
   <h3 id="rental_item_name"></h3>
   </div>
+
+  <div>
+    <strong id="erro" class="erro"></strong><br>
+    <strong>Start Date: </strong><p id="rental_start_date"><%=@rental.start_date%></p>
+    <strong>End Date: </strong><p id="rental_end_date"><%=@rental.end_date%></p>
+  </div>
+
+
+<%= form_with(model: [@rental, @rental_item], local: true) do |form| %>
 
   <div class="field">
     <%= form.label :equipment_id, hidden: true %>
@@ -38,6 +33,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit "Create Rental Item" %>
+    <%= form.submit "Create Rental Item", class: "button-group" %>
   </div>
 <% end %>

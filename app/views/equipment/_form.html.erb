@@ -32,8 +32,8 @@
   </div>
 
   <div>
-    <%= form.label :statu, style: "display: block" %>
-    <%= form.text_field :statu %>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.select :status, Equipment.statuses.keys.map { |status| [status.humanize, status]} %>
   </div>
 
   <div>

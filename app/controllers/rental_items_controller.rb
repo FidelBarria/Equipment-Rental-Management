@@ -5,6 +5,11 @@ class RentalItemsController < ApplicationController
   end
   def new
     @rental_item = @rental.rental_items.build
+    if params[:query].present?
+      @equipment = Equipment.by_name(params[:query])
+    else
+      @equipment = Equipment.all
+    end
   end
   def create
     @rental = Rental.find(params[:rental_id])
@@ -12,6 +17,7 @@ class RentalItemsController < ApplicationController
     if @rental_item.save
       redirect_to new_rental_rental_item_path(@rental), notice: "Rental item was successfully created."
     else
+      @equipment = Equipment.all
       render :new
     end
   end
