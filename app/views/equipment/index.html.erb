@@ -2,15 +2,9 @@
 
 <% content_for :title, "Equipment" %>
 
-<h1>Equipment</h1>
+<%= link_to "Home", root_path, class: "button-group" %>
+<%= link_to "New equipment", new_equipment_path, class: "button-group" %>
 
-<div id="equipment">
-  <% @equipment.each do |equipment| %>
-    <%= render equipment %>
-    <p>
-      <%= link_to "Show this equipment", equipment %>
-    </p>
-  <% end %>
-</div>
+<%= render "table_equipment" %>
 
-<%= link_to "New equipment", new_equipment_path %>
+

@@ -10,24 +10,31 @@
     </div>
   <% end %>
 
+  
+
   <div class="field">
-    <%= form.label :equipment_id %>
-    <%= form.collection_select :equipment_id, Equipment.all, :id, :name %>
+  <h2>Item Selecionado:</h2>
+  <h3 id="rental_item_name"></h3>
+  </div>
+
+  <div class="field">
+    <%= form.label :equipment_id, hidden: true %>
+    <%= form.text_field :equipment_id, id: "rental_item_equipment_id", readonly: true, hidden: true %>
   </div>
 
   <div class="field">
     <%= form.label :quantity %>
-    <%= form.number_field :quantity, step: 1 %>
+    <%= form.number_field :quantity, id: "rental_item_quantity", step: 1 %>
   </div>
 
   <div class="field">
     <%= form.label :daily_price %>
-    <%= form.number_field :daily_price, value: Equipment.first.daily_value, step: 0.01 %>
+    <%= form.number_field :daily_price, id: "rental_item_daily_price", step: 0.01 %>
   </div>
 
   <div class="field">
     <%= form.label :subtotal %>
-    <%= form.number_field :subtotal, step: 0.01 %>
+    <%= form.number_field :subtotal, id: "rental_item_subtotal", step: 0.01, readonly: true %>
   </div>
 
   <div class="actions">

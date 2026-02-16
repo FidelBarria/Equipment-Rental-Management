@@ -27,3 +27,28 @@
 .table tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
+
+.menu {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+.button-group {
+  background-color: rgb(154, 233, 122);
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.button-group:hover {
+  background-color: darkseagreen;
+  opacity: 0.7;
+}

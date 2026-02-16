@@ -1,0 +1,31 @@
+<h1>Rental Items Table</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Equipment ID</td>
+            <td>Equipment Name</td>
+            <td>Quantity</td>
+            <td>Daily Price</td>
+            <td>Subtotal</td>
+            <td>Actions</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% if rental.rental_items.any? %>
+        <% @rental.rental_items.each do |rental_item| %>
+        <tr>
+            <td><%= rental_item.equipment_id %></td>
+            <td><%= rental_item.equipment&.name %></td>
+            <td><%= rental_item.quantity %></td>
+            <td><%= rental_item.daily_price %></td>
+            <td><%= rental_item.subtotal %></td>
+            <td><%= link_to "Delete", [@rental, rental_item], data: { turbo_method: :delete }, confirm: "Are you sure?" %></td>
+        </tr>
+        <% end %>
+        <%else%>
+                <tr>
+                    <td colspan="4">No rental items found.</td>
+                </tr>
+        <%end%>
+    </tbody>

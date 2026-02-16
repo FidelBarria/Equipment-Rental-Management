@@ -1,0 +1,53 @@
+<h2>Equipment List</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Equipment ID</td>
+            <td>Equipment Name</td>
+            <td>Daily Value</td>
+            <td>Status</td>
+            <td>Quantity</td>
+            <td>Action</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% equipment.each do |equipment| %>
+        <tr>
+            <td><%= equipment.id %></td>
+            <td><%= equipment&.name %></td>
+            <td><%= equipment.daily_value %></td>
+            <td><%= equipment.statu.humanize %></td>
+            <td><%= equipment.quantity %></td>
+            <td>
+                <%= link_to "Add to Rental", "javascript:void(0)", 
+                    onclick: "PrencheForm(#{equipment.id}, '#{equipment.name}', #{equipment.daily_value})", 
+                    class: "btn btn-primary" %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<script>
+    function PrencheForm(equipmentId, equipmentName, dailyPrice) {
+        document.getElementById("rental_item_equipment_id").value = equipmentId;
+        document.getElementById("rental_item_name").innerText = equipmentName;
+        document.getElementById("rental_item_daily_price").value = dailyPrice;  
+    }
+    document.addEventListener("turbo:load", () => {
+        const campo = document.getElementById("rental_item_quantity");
+  
+        if (campo) {
+         campo.addEventListener("change", (event) => {
+         console.log("O valor mudou para: " + event.target.value);
+         // Lógica de atualização
+         document.getElementById("rental_item_subtotal").value = SomaSubtotal(parseFloat(document.getElementById("rental_item_daily_price").value),  
+         parseInt(event.target.value)); 
+         });
+        } 
+    });
+
+    function SomaSubtotal(dailyValue, quantity) {
+        return dailyValue * quantity;
+    }
+</script>

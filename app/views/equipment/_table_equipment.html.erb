@@ -1,0 +1,24 @@
+<table class="table">
+  <thead>
+    <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Daily Value</th>
+        <th>Status</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @equipment.each do |equipment| %>
+      <tr>
+        <td><%= equipment.name %></td>
+        <td><%= equipment.category.name %></td>
+        <td><%= equipment.daily_value %></td>
+        <td><%= equipment.statu %></td>
+        <td><%= equipment.quantity %></td> 
+        <td><%= link_to "Details", equipment, class: "button-group" %></td>
+      </tr>
+    <% end %>
+  </tbody>
