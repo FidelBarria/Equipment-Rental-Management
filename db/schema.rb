@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_16_114925) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_17_023410) do
   create_table "categories", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "description"
@@ -29,12 +29,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_16_114925) do
   end
 
   create_table "equipment", force: :cascade do |t|
-    t.string "category"
     t.integer "category_id"
     t.datetime "created_at", null: false
     t.decimal "daily_value"
     t.string "name"
-    t.integer "quantity"
     t.integer "status"
     t.datetime "updated_at", null: false
   end
@@ -84,8 +82,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_16_114925) do
     t.datetime "created_at", null: false
     t.string "email"
     t.string "name"
-    t.string "password"
-    t.string "string"
+    t.string "password_digest"
     t.datetime "updated_at", null: false
     t.string "user"
   end

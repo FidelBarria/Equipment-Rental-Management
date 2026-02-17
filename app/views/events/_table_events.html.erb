@@ -1,0 +1,43 @@
+ 
+<div>
+    
+    <%= link_to "All Events", events_path, class: "button-group" %>
+    <%= link_to "January", events_path(start_date: Date.new(Date.today.year, 1, 1), end_date: Date.new(Date.today.year, 1, 31)) %>
+    <%= link_to "February", events_path(start_date: Date.new(Date.today.year, 2, 1), end_date: Date.new(Date.today.year, 2, 28)) %>
+    <%= link_to "March", events_path(start_date: Date.new(Date.today.year, 3, 1), end_date: Date.new(Date.today.year, 3, 31)) %>
+    <%= link_to "April", events_path(start_date: Date.new(Date.today.year, 4, 1), end_date: Date.new(Date.today.year, 4, 30)) %>
+    <%= link_to "May", events_path(start_date: Date.new(Date.today.year, 5, 1), end_date: Date.new(Date.today.year, 5, 31)) %>
+    <%= link_to "June", events_path(start_date: Date.new(Date.today.year, 6, 1), end_date: Date.new(Date.today.year, 6, 30)) %>
+    <%= link_to "July", events_path(start_date: Date.new(Date.today.year, 7, 1), end_date: Date.new(Date.today.year, 7, 31)) %>
+    <%= link_to "August", events_path(start_date: Date.new(Date.today.year, 8, 1), end_date: Date.new(Date.today.year, 8, 31)) %>
+    <%= link_to "September", events_path(start_date: Date.new(Date.today.year, 9, 1), end_date: Date.new(Date.today.year, 9, 30)) %>
+    <%= link_to "October", events_path(start_date: Date.new(Date.today.year, 10, 1), end_date: Date.new(Date.today.year, 10, 31)) %>
+    <%= link_to "November", events_path(start_date: Date.new(Date.today.year, 11, 1), end_date: Date.new(Date.today.year, 11, 30)) %>
+    <%= link_to "December", events_path(start_date: Date.new(Date.today.year, 12, 1), end_date: Date.new(Date.today.year, 12, 31)) %>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Start Date</td>
+            <td>End Date</td>
+            <td>Local</td>
+            <td>Actions</td>
+        </tr>
+    </thead>  
+    <tbody>
+        <% @events&.each do |event|%>
+        <tr>
+            <td><%=event.name%></td>
+            <td><%=event.start_date.strftime("%d/%m/%Y") %></td>
+            <td><%=event.end_date.strftime("%d/%m/%Y") %></td>
+            <td><%=event.local%></td>
+            <td><%= link_to "Details", event_path(event), class: "button-group" %>
+                <%= link_to "Edit", edit_event_path(event), class: "button-group" %>
+                <%= link_to "Add Equipment", new_rental_path(event), class: "button-group" %>
+            </td>
+        </tr>
+        <%end%>
+    </tbody>

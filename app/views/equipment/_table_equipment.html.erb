@@ -6,7 +6,6 @@
         <th>Category</th>
         <th>Daily Value</th>
         <th>Status</th>
-        <th>Quantity</th>
         <th>Actions</th>
     </tr>
   </thead>
@@ -19,7 +18,6 @@
         <td><%= equipment.category.name %></td>
         <td><%= equipment.daily_value %></td>
         <td><%= equipment.status&.humanize %></td>
-        <td><%= equipment.quantity %></td> 
         <td><%= link_to "Details", equipment, class: "button-group" %></td>
       </tr>
     <% end %>

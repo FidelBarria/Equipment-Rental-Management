@@ -1,20 +1,29 @@
-Rails.application.routes.draw { resources :events
-  resources :equipment
-  resources :users
-  resources :categories
-  resources :rentals do
-      resources :rental_items
-      resources :payments
-  end
-  resources :clients
-  resources :home
-  # resources :rental_items
-  # resources :payments
+Rails.application.routes.draw do
+  # Página inicial: Se estiver logado vai para home, se não, para login
   root "home#index"
 
+  # Rotas de Autenticação (Sessões)
+  get    "/login",   to: "sessions#new"     # Página de login
+  post   "/login",   to: "sessions#create"  # Ação de entrar
+  delete "/logout",  to: "sessions#destroy" # Ação de sair
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Rotas de Registo (Utilizadores)
+  get    "/signup",  to: "users#new"        # Página de registo
+  resources :users, except: [ :new ]          # Outras ações de user (edit, show, etc)
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check }
+  # Recursos Principais
+  resources :events
+  resources :equipment
+  resources :categories
+  resources :clients
+  resources :home, only: [ :index ]
+
+  # Recursos Aninhados (Nested Resources)
+  resources :rentals do
+    resources :rental_items
+    resources :payments
+  end
+
+  # Health Check
+  get "up" => "rails/health#show", as: :rails_health_check
+end

@@ -1,4 +1,14 @@
 <%= form_with model: user do |form|%>
+    <% if user.errors.any? %>
+        <div class="alert alert-danger">
+            <ul>
+                <% user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
     <%= form.label :name%>
     <%= form.text_field :name%>
 
@@ -9,7 +19,10 @@
     <%= form.text_field :email%>
 
     <%= form.label :password%>
-    <%= form.text_field :password%>
+    <%= form.password_field :password%>
+
+    <%= form.label :password_confirmation%>
+    <%= form.password_field :password_confirmation%>
 
     <%= form.submit%>
 <%end%>

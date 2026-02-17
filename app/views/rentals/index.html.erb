@@ -29,7 +29,7 @@
             <td><%= rental.event.name%></td>
             <td><%= rental.start_date.strftime("%d/%m/%Y") %></td>
             <td><%= rental.end_date.strftime("%d/%m/%Y") %></td>
-            <td><%= rental.user.name%></td>
+            <td><%= rental.user&.name%></td>
             <td><%= rental.total_value %></td>
             <td><%= rental.status.humanize %></td>
             <td>

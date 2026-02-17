@@ -3,7 +3,11 @@ class EventsController < ApplicationController
 
   # GET /events or /events.json
   def index
-    @events = Event.all
+    if params[:start_date].present? && params[:end_date].present?
+      @events = Event.by_start_and_end_date(params[:start_date], params[:end_date])
+    else
+      @events = Event.all
+    end
   end
 
   # GET /events/1 or /events/1.json
@@ -19,20 +23,16 @@ class EventsController < ApplicationController
   def edit
   end
 
-  # POST /events or /events.json
-  def create
-    @event = Event.new(event_params)
+# POST /events or /events.json
+def create
+  @event = Event.new(event_params)
 
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: "Event was successfully created." }
-        format.json { render :show, status: :created, location: @event }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
-    end
+  if @event.save
+    redirect_to events_path, notice: "Event was successfully created."
+  else
+    render :new, status: :unprocessable_entity
   end
+end
 
   # PATCH/PUT /events/1 or /events/1.json
   def update

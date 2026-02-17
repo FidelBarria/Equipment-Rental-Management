@@ -25,4 +25,9 @@
     <div>
         <%= link_to "Categories", categories_path, class: "button-group" %>
     </div>
+    <div>
+        <% if logged_in? %>
+            <%= link_to "Sair", logout_path, data: { turbo_method: :delete, turbo_confirm: "Deseja realmente sair?" }, class: "button-group" %>
+        <% end %>
+    </div>
 </div>

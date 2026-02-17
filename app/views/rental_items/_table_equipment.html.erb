@@ -15,7 +15,6 @@
             <td>Equipment Name</td>
             <td>Daily Value</td>
             <td>Status</td>
-            <td>Quantity</td>
             <td>Action</td>
         </tr>
     </thead>
@@ -26,7 +25,6 @@
             <td><%= equipment&.name %></td>
             <td><%= equipment.daily_value %></td>
             <td><%= equipment.status&.humanize %></td>
-            <td><%= equipment.quantity %></td>
             <td>
                 <%= link_to "Add to Rental", "javascript:void(0)", 
                     onclick: "VerifyStatus('#{equipment.status}', #{equipment.id}, '#{j equipment.name}', #{equipment.daily_value})", 
@@ -43,8 +41,12 @@
             document.getElementById("erro").innerText = "Item is unavailable for rent"
             document.getElementById("rental_item_daily_price").value = ""; 
         }else{
-            document.getElementById("erro").innerText = ""
-            PrencheForm(quipmentId, equipmentName, dailyPrice)
+            document.getElementById("erro").innerText = "";
+            PrencheForm(quipmentId, equipmentName, dailyPrice);
+            document.getElementById("rental_item_subtotal").value = 
+                        SomaSubtotal(parseFloat(document.getElementById("rental_item_daily_price").value), 
+            document.getElementById("rental_start_date").innerText, 
+            document.getElementById("rental_end_date").innerText);
         }
     }
     function PrencheForm(equipmentId, equipmentName, dailyPrice) {
@@ -53,27 +55,14 @@
         document.getElementById("rental_item_daily_price").value = dailyPrice;  
 
     }
-    document.addEventListener("turbo:load", () => {
-        const campo = document.getElementById("rental_item_quantity");
-  
-        if (campo) {
-         campo.addEventListener("change", (event) => {
-         console.log("O valor mudou para: " + event.target.value);
-         // Lógica de atualização
-         document.getElementById("rental_item_subtotal").value = 
-         SomaSubtotal(parseFloat(document.getElementById("rental_item_daily_price").value), parseInt(event.target.value), document.getElementById("rental_start_date").innerText, 
-         document.getElementById("rental_end_date").innerText); 
-         });
-        } 
-    });
 
-    function SomaSubtotal(dailyValue, quantity, start_date, end_date) {
+    function SomaSubtotal(dailyValue, start_date, end_date) {
         var start = new Date(start_date);
         var end = new Date(end_date);
         end.setDate(end.getDate() + 1);
         var timeDiff = Math.abs(start.getTime() - end.getTime());
         var diffDays = Math.ceil(timeDiff / (1000*3600*24));
         console.log("O valor mudou para: " + diffDays);
-        return (dailyValue * quantity) * diffDays;
+        return dailyValue * diffDays;
     }
 </script>

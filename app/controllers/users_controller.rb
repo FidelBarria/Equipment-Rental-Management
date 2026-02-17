@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :require_user, only: [ :new, :create ]
   def index
     @users = User.all
   end
@@ -17,7 +18,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to users_path, notice: "User created"
+      redirect_to users_path, notice: "User created successfully."
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,6 +27,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.expect(user: [ :name, :email, :user, :password ])
+    params.require(:user).permit(:name, :user, :email, :password, :password_confirmation)
   end
 end
