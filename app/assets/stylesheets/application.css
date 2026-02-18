@@ -145,22 +145,47 @@
     opacity: 0.7;
 }
 
-.banner_login {
+.container-login{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #8FBC8B, #2E8B57);
+}
+
+dialog {
+  border: none;
+  border-radius: 8px;
+  padding: 20px;
+  width: 20%;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro (overlay) */
+}
+
+
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .header-usuario {
+    position: fixed; /* fixo na tela */
+    top: 0;
+    right: 0;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-right: 550px;
+  }
+
+  .container-header{
     display: flex;
-    justify-content: left;
-    align-items: left;
-    transition: transform 0.5s;
-    width: 650px;
-}
-
-
-.card-login{
-  display: block;
-  background-color: #333;
-  width: 100%;
-}
-
-.banner_img {
-  max-width: 100%;
-  max-height: auto;
-}
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }

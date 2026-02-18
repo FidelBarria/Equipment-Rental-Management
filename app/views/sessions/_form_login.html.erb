@@ -1,0 +1,29 @@
+    <div class="card">
+        <%= form_with url: login_path do |form| %>
+            <% if flash[:notice] %>
+                <div class="alert alert-success">
+                    <%= flash[:notice] %>
+                </div>
+            <% end %>
+
+        <% if flash[:alert] %>
+            <div class="alert alert-danger">
+                <%= flash[:alert] %>
+            </div>
+        <% end %>
+        <div class="input-group">
+        <%= form.label :user, "User:" %>
+        <%= form.text_field :user %>
+        </div>
+        <div class="input-group">
+        <%= form.label :password, "Password:" %>
+        <%= form.password_field :password %>
+        </div>
+        <div class="input-group">
+         <%= form.submit "Login" %>
+        </div>
+        <% end %>
+        <div class="input-group">
+        <button id="openModal" class="btn-submit">Não tem cadastro? Cadastrar agora</button>
+        </div>
+    </div>

@@ -1,33 +1,23 @@
-<h1>Welcome to the Equipment Rental Management System</h1>
-<h2>Login-in to access the system</h2>
-<%= form_with url: login_path do |form| %>
-    <% if flash[:notice] %>
-        <div class="alert alert-success">
-        <%= flash[:notice] %>
-        </div>
-    <% end %>
 
-    <% if flash[:alert] %>
-        <div class="alert alert-danger">
-        <%= flash[:alert] %>
-        </div>
-    <% end %>
-    <%= form.label :user, "User:" %>
-    <%= form.text_field :user %>
-
-    <%= form.label :password, "Password:" %>
-    <%= form.password_field :password %>
-
-     <%= form.submit "Login" %>
-<% end %>
-
-
-<div class="card-login">
-    <div class="caixa">
-        <%= image_tag "banner.png", class: "banner_img"%>
-    </div>
-    <div>
-       <input type="checkbox" id="mover"/>
-    </div>
+<div class="container-login">
+    <%= render "form_login"%>  
 </div>
+    <dialog id="modal">
+        <%= render "form_new", user: User.new%>    
+    </dialog> 
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.querySelector("#modal");
+    const openBtn = document.querySelector("#openModal");
+    const closeBtn = document.querySelector("#closeModal");
+
+    openBtn.addEventListener("click", () => modal.showModal()); // Abre
+    closeBtn.addEventListener("click", () => modal.close()); 
+    });
+</script>
+
+
+
 

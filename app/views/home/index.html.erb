@@ -1,33 +1,42 @@
-<h1>Welcome to the Equipment Rental Management System</h1>
 
-<p>This application allows you to manage equipment rentals, including creating and tracking rentals, rental items, and payments.</p>
-
-<p>Use the navigation links above to get started.</p>
 
 <%# You can add more content here, such as recent rentals, popular items, or any other relevant information for users. %>
 
-<div class="menu_top">
+<div class="container-header">
+    <h3>Empresa de Eventos</h3>
+<div class="header-usuario">
+    <p><strong><%= current_user.name%></strong></p>
     <div>
-        <%= link_to "Users", users_path, class: "button-group" %>
-    </div>
-    <div>
-        <%= link_to "Clients", clients_path, class: "button-group" %>
-    </div>
-    <div>
-        <%= link_to "Rentals", rentals_path, class: "button-group" %>
-    </div>
-    <div>
-        <%= link_to "Events", events_path, class: "button-group" %>
-    </div>
-    <div>
-        <%= link_to "Equipments", equipment_index_path, class: "button-group" %>
-    </div>
-    <div>
-        <%= link_to "Categories", categories_path, class: "button-group" %>
-    </div>
-    <div>
-        <% if logged_in? %>
-            <%= button_to "Sair", logout_path, method: :delete, class: "button-group" %>
-        <% end %>
+        <p>Operador</p>
     </div>
 </div>
+</div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="menu_top">
+        <div>
+            <%= link_to "Users", users_path, class: "button-group" %>
+        </div>
+        <div>
+            <%= link_to "Clients", clients_path, class: "button-group" %>
+        </div>
+        <div>
+            <%= link_to "Rentals", rentals_path, class: "button-group" %>
+        </div>
+        <div>
+            <%= link_to "Events", events_path, class: "button-group" %>
+        </div>
+        <div>
+            <%= link_to "Equipments", equipment_index_path, class: "button-group" %>
+        </div>
+        <div>
+            <%= link_to "Categories", categories_path, class: "button-group" %>
+        </div>
+        <div>
+            <% if logged_in? %>
+                <%= button_to "Sair", logout_path, method: :delete, class: "button-group" %>
+            <% end %>
+        </div>
+</div>  

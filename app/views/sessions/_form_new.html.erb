@@ -1,0 +1,43 @@
+<div class="card">
+<%= form_with model: user do |form|%>
+    <% if user.errors.any? %>
+        <div class="alert alert-danger">
+            <ul>
+                <% user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <div class="input-group">
+    <%= form.label :name%>
+    <%= form.text_field :name%>
+    </div>
+
+    <div class="input-group">
+    <%= form.label :user%>
+    <%= form.text_field :user%>
+    </div>
+
+    <div class="input-group">
+    <%= form.label :email%>
+    <%= form.text_field :email%>
+    </div>
+
+    <div class="input-group">
+    <%= form.label :password%>
+    <%= form.password_field :password%>
+    </div>
+
+    <div class="input-group">
+    <%= form.label :password_confirmation%>
+    <%= form.password_field :password_confirmation%>
+    </div>
+
+    <div class="input-group">
+    <%= form.submit id: "closeModal" %>
+    </div>
+<%end%>
+<div class="input-group">
+    <button id="closeModal" class="btn-submit">Fechar</button>
+</div>
