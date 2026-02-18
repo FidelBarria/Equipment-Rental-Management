@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    puts "entrou no destroy"
     session[:user_id] = nil
     @current_user = nil
     redirect_to root_path, notice: "Logged out successfully."

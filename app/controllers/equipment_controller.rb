@@ -70,6 +70,6 @@ class EquipmentController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def equipment_params
-      params.expect(equipment: [ :name, :category_id, :quantity, :daily_value, :statu ])
+      params.expect(equipment: [ :name, :category_id, :status, :daily_value ])
     end
 end

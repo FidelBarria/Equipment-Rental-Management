@@ -13,6 +13,9 @@ class RentalsController < ApplicationController
 
   def new
     @rental = Rental.new
+    @rental.event_id = params[:event_id] if params[:event_id].present?
+    @rental.start_date = params[:start_date] if params[:start_date].present?
+    @rental.end_date = params[:end_date] if params[:end_date].present?
   end
 
   def create
@@ -20,7 +23,7 @@ class RentalsController < ApplicationController
     if @rental.save
       redirect_to rentals_path, notice: "Rental was successfully created."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

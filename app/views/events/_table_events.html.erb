@@ -36,7 +36,7 @@
             <td><%=event.local%></td>
             <td><%= link_to "Details", event_path(event), class: "button-group" %>
                 <%= link_to "Edit", edit_event_path(event), class: "button-group" %>
-                <%= link_to "Add Equipment", new_rental_path(event), class: "button-group" %>
+                <%= link_to "Add Rental", new_rental_path(event_id: event.id, start_date: event.start_date, end_date: event.end_date), class: "button-group" %>
             </td>
         </tr>
         <%end%>

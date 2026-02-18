@@ -28,7 +28,13 @@
   background-color: #f9f9f9;
 }
 
-.menu {
+.menu_top {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.menu_bottom {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -36,9 +42,9 @@
 
 
 .button-group {
-  background-color: rgb(154, 233, 122);
+  background-color: darkseagreen;
   border: none;
-  color: rgb(0, 0, 0);
+  color: white;
   padding: 10px 20px;
   text-decoration: none;
   display: inline-block;
@@ -53,7 +59,108 @@
   opacity: 0.7;
 }
 
-.erro {
+.error-messages {
   font-size: medium;
   color: red;
+}
+
+/* Centraliza o card na página */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo do Card */
+.card {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Largura do card */
+    box-sizing: border-box;
+}
+
+/* Estilo do Formulário */
+.form-content h2, p, h4, h5 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #333;
+}
+
+.foot{
+    margin-top: 2rem;
+    text-align: right;
+    color: #777;
+    font-size: 0.6rem;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box; /* Garante que padding não aumente a largura */
+}
+
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box; /* Garante que padding não aumente a largura */
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: darkseagreen;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: darkseagreen;
+    opacity: 0.7;
+}
+
+.banner_login {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    transition: transform 0.5s;
+    width: 650px;
+}
+
+
+.card-login{
+  display: block;
+  background-color: #333;
+  width: 100%;
+}
+
+.banner_img {
+  max-width: 100%;
+  max-height: auto;
 }

@@ -1,40 +1,49 @@
-<%= form_with(model: @rental, local: true) do |form| %>
-  <% if @rental.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@rental.errors.count, "error") %> prohibited this rental from being saved:</h2>
-      <ul>
-        <% @rental.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+<div class="card-container">
+  <div class="card">
+<%= form_with(model: @rental, local: true, class: "form-content") do |form| %>
+    <% if @rental.errors.any? %>
+      <div class="input-group">
+        <h5><%= pluralize(@rental.errors.count, "Errors ") %> please correct the errors below. </h5>
+        <ul>
+          <% @rental.errors.full_messages.each do |message| %>
+            <li><p class="error-messages"><%= message %></p></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-    <div class="field">
-      <%= form.label :user_id %>
-      <%= form.collection_select :user_id, User.all, :id, :name %>
+    <h2>New Rental</h2>
+    <div class="input-group">
+      <%= form.hidden_field :user_id, value: current_user.id %>
     </div>
-    <div class="field">
+    <div class="input-group">
+      <p><%= @rental.event.name %></p>
+    </div>
+    <div class="input-group">
       <%= form.label :client_id %>
       <%= form.collection_select :client_id, Client.all, :id, :name %>
     </div>
-    <div class="field">
-      <%= form.label :event_id %>
-      <%= form.collection_select :event_id, Event.all, :id, :name %>
+    <div class="input-group">
+      <%= form.hidden_field :event_id %>
     </div>
-    <div class="field">
+    <div class="input-group">
       <%= form.label :start_date %>
       <%= form.date_field :start_date %>
     </div>
-    <div class="field">
+    <div class="input-group">
       <%= form.label :end_date %>
       <%= form.date_field :end_date %>
     </div>
-    <div class="field">
+    <div class="input-group">
       <%= form.label :status %>
       <%= form.select :status, Rental.statuses.keys.map { |status| [status.humanize, status] } %>
     </div>
 
     <div class="actions">
-      <%= form.submit "Create Rental" %> 
+      <%= form.submit "Create Rental", class: "btn-submit" %> 
     </div>
+    <div>
+    <p class="foot"><%= current_user.name %></p>
+    <div>
   <% end %>
+  </div>
+</div>
