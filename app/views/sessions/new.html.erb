@@ -2,18 +2,16 @@
 <div class="container-login">
     <%= render "form_login"%>  
 </div>
-    <dialog id="modal">
-        <%= render "form_new", user: User.new%>    
-    </dialog> 
+
+<div class="modal fade" id="meuModal" tabindex="-1" aria-hidden="true">
+    <%= render "form_new", user: User.new%>  
+</div>
 
 <script>
-    const modal = document.querySelector("#modal");
-    const openBtn = document.querySelector("#openModal");
-    const closeBtn = document.querySelector("#closeModal");
-
-    openBtn.addEventListener("click", () => modal.showModal()); // Abre
-    closeBtn.addEventListener("click", () => modal.close()); 
+    var meuModal = new bootstrap.Modal(document.getElementById('meuModal'));
+    meuModal.show();
 </script>
+
 
 
 
