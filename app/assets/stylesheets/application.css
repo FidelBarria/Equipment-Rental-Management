@@ -8,25 +8,7 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
-
- .table {
-    border-collapse: collapse;
-    width: 100%;
-    text-align: center;
- }
-
- .table thead, th {
-    background-color: rgb(154, 233, 122);
- }
-
-.table th, td {
-  padding: 12px 15px; /* Espaçamento interno */
-  border: 1px solid #ddd; /* Borda suave */
-}
-
-.table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
+@import "bootstrap";
 
 .menu_top {
   width: 100%;
@@ -73,16 +55,16 @@
     font-family: Arial, sans-serif;
 }
 
-/* Estilo do Card */
+/* Estilo do Card 
 .card {
     background-color: #fff;
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px; /* Largura do card */
+    max-width: 400px; /* Largura do card 
     box-sizing: border-box;
-}
+}*/
 
 /* Estilo do Formulário */
 .form-content h2, p, h4, h5 {
@@ -189,3 +171,19 @@ dialog::backdrop {
     justify-content: center;
     align-items: center;
   }
+/*bootstrap*/
+
+.btn-primary {
+  background-color: darkseagreen !important;
+  border-color: darkseagreen !important;
+}
+
+.btn-primary:hover{
+  background-color: darkseagreen !important;
+  opacity: 0.7 !important;
+}
+
+.text-customized{
+  font-size: 50px;
+  color: darkseagreen
+}

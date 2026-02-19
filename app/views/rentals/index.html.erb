@@ -1,6 +1,6 @@
-<h1>Rentals</h1>
 
-<div class="menu_top">
+
+<div class="menu_top" >
     <div>
         <%= link_to "Users", users_path, class: "button-group" %>
     </div>
@@ -28,37 +28,50 @@
 
 <%=link_to "New Retal", new_rental_path%>
 
-<h4>Filter</h4>
-<%= link_to "All", rentals_path %>
-<%= link_to "Active", rentals_path(status: :active) %>
-<%= link_to "Pending", rentals_path(status: :pending) %>
-<%= link_to "Completed", rentals_path(status: :completed) %>
-<%= link_to "Cancelled", rentals_path(status: :cancelled) %>
 
-<table class="table">
+
+<div class="card w-100 mb-3">
+    
+    <div class="card-body">
+          <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseFilter" role="button" aria-expanded="false" aria-controls="collapseFilter">
+            <i class="bi bi-filter"></i>
+          </a>
+        <div class="collapse" id="collapseFilter">
+            <div class="card card-body w-25 mb-3">
+                <div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom: 10px">
+                    <%= link_to "All", rentals_path, class: "btn btn-primary"%>
+                    <%= link_to "Active", rentals_path(status: :active), class: "btn btn-primary" %>
+                    <%= link_to "Pending", rentals_path(status: :pending), class: "btn btn-primary" %>
+                    <%= link_to "Completed", rentals_path(status: :completed), class: "btn btn-primary" %>
+                    <%= link_to "Cancelled", rentals_path(status: :cancelled), class: "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+        <h1 class="text-center text-customized">Rentals</h1>
+<table class="table table-striped">
     <thead>
         <tr>
-            <td>Client</td>
-            <td>Event</td>
-            <td>Rental Date</td>
-            <td>Return Date</td>
-            <td>User</td>
-            <td>Total Value</td>
-            <td>Status</td>
-            <td>Actions</td>
+            <th scope="col" class="text-center">Client</th>
+            <th scope="col" class="text-center">Event</th>
+            <th scope="col" class="text-center">Rental Date</th>
+            <th scope="col" class="text-center">Return Date</th>
+            <th scope="col" class="text-center">User</th>
+            <th scope="col" class="text-center">Total Value</th>
+            <th scope="col" class="text-center">Status</th>
+            <th scope="col" class="text-center">Actions</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="table-group-divider">
         <% @rentals.each do |rental|%>
         <tr>
-            <td><%= rental.client.name%></td>
-            <td><%= rental.event.name%></td>
-            <td><%= rental.start_date.strftime("%d/%m/%Y") %></td>
-            <td><%= rental.end_date.strftime("%d/%m/%Y") %></td>
-            <td><%= rental.user&.name%></td>
-            <td><%= rental.total_value %></td>
-            <td><%= rental.status.humanize %></td>
-            <td>
+            <td scope="row" class="text-center"><%= rental.client.name%></td>
+            <td scope="row" class="text-center"><%= rental.event.name%></td>
+            <td scope="row" class="text-center"><%= rental.start_date.strftime("%d/%m/%Y") %></td>
+            <td scope="row" class="text-center"><%= rental.end_date.strftime("%d/%m/%Y") %></td>
+            <td scope="row" class="text-center"><%= rental.user&.name%></td>
+            <td scope="row" class="text-center"><%= rental.total_value %></td>
+            <td scope="row" class="text-center"><%= rental.status.humanize %></td>
+            <td scope="row" class="text-center">
                 <%= link_to  "Details", rental_path(rental)%>
                 <%= link_to "Adicionar Items", new_rental_rental_item_path(rental), class: "btn btn-success" %>
                 <%= link_to "Payment", new_rental_payment_path(rental)%>
@@ -66,3 +79,6 @@
         </tr>
         <%end%>
     </tbody>
+</table>
+</div>
+</div> 

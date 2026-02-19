@@ -11,11 +11,11 @@
                 <%= flash[:alert] %>
             </div>
         <% end %>
-        <div class="input-group">
-        <%= form.label :user, "User:" %>
-        <%= form.text_field :user %>
+        <div class="form-floating mb-3">
+        <%= form.label :user, for: "floatingInput" %>
+        <%= form.text_field :user, class: "form-control", id: "floatingInput", placeholder: "User" %>
         </div>
-        <div class="input-group">
+        <div class="form-floating">
         <%= form.label :password, "Password:" %>
         <%= form.password_field :password %>
         </div>

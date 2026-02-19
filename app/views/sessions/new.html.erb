@@ -6,16 +6,13 @@
         <%= render "form_new", user: User.new%>    
     </dialog> 
 
-
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
     const modal = document.querySelector("#modal");
     const openBtn = document.querySelector("#openModal");
     const closeBtn = document.querySelector("#closeModal");
 
     openBtn.addEventListener("click", () => modal.showModal()); // Abre
     closeBtn.addEventListener("click", () => modal.close()); 
-    });
 </script>
 
 
