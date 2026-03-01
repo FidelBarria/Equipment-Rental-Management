@@ -176,6 +176,8 @@ dialog::backdrop {
 .btn-primary {
   background-color: darkseagreen !important;
   border-color: darkseagreen !important;
+  padding: 10px 20px !important;
+  margin: 4px 2px !important;
 }
 
 .btn-primary:hover{
@@ -186,4 +188,10 @@ dialog::backdrop {
 .text-customized{
   font-size: 50px;
   color: darkseagreen
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+  background-color: darkseagreen !important;
+  opacity: 0.7 !important;
 }

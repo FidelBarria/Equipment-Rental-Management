@@ -3,12 +3,25 @@
     <%= render "form_login"%>  
 </div>
 
-<div class="modal fade" id="meuModal" tabindex="-1" aria-hidden="true">
-    <%= render "form_new", user: User.new%>  
+<div class="modal fade" id="modalSubscription" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title text-customized">CADASTRO</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= turbo_frame_tag "new_user_frame", src: signup_path, loading: "lazy" %>
+      </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div> 
 </div>
 
 <script>
-    var meuModal = new bootstrap.Modal(document.getElementById('meuModal'));
+    var meuModal = new bootstrap.Modal(document.getElementById('modalSubscription'));
     meuModal.show();
 </script>
 

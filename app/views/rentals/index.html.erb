@@ -1,35 +1,4 @@
 
-
-<div class="menu_top" >
-    <div>
-        <%= link_to "Users", users_path, class: "button-group" %>
-    </div>
-    <div>
-        <%= link_to "Clients", clients_path, class: "button-group" %>
-    </div>
-    <div>
-        <%= link_to "Rentals", rentals_path, class: "button-group" %>
-    </div>
-    <div>
-        <%= link_to "Events", events_path, class: "button-group" %>
-    </div>
-    <div>
-        <%= link_to "Equipments", equipment_index_path, class: "button-group" %>
-    </div>
-    <div>
-        <%= link_to "Categories", categories_path, class: "button-group" %>
-    </div>
-    <div>
-        <% if logged_in? %>
-            <%= button_to "Sair", logout_path, method: :delete, class: "button-group" %>
-        <% end %>
-    </div>
-</div>
-
-<%=link_to "New Retal", new_rental_path%>
-
-
-
 <div class="card w-100 mb-3">
     
     <div class="card-body">
@@ -37,7 +6,7 @@
             <i class="bi bi-filter"></i>
           </a>
         <div class="collapse" id="collapseFilter">
-            <div class="card card-body w-25 mb-3">
+            <div class="card card-body w-50 mb-3">
                 <div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom: 10px">
                     <%= link_to "All", rentals_path, class: "btn btn-primary"%>
                     <%= link_to "Active", rentals_path(status: :active), class: "btn btn-primary" %>
