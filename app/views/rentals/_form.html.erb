@@ -1,5 +1,5 @@
-<div class="card-container">
-  <div class="card">
+
+<div class="card m-3">
 <%= form_with(model: @rental, local: true, class: "form-content") do |form| %>
     <% if @rental.errors.any? %>
       <div class="input-group">
@@ -45,5 +45,4 @@
     <p class="foot"><%= current_user.name %></p>
     <div>
   <% end %>
-  </div>
 </div>

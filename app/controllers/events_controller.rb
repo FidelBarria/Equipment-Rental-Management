@@ -5,6 +5,8 @@ class EventsController < ApplicationController
   def index
     if params[:start_date].present? && params[:end_date].present?
       @events = Event.by_start_and_end_date(params[:start_date], params[:end_date])
+    elsif params[:name].present?
+          @events = Event.where("name LIKE ?", "%#{params[:name]}%")
     else
       @events = Event.all
     end
