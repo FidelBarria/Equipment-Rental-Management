@@ -41,9 +41,9 @@
             <td scope="row" class="text-center"><%= rental.total_value %></td>
             <td scope="row" class="text-center"><%= rental.status.humanize %></td>
             <td scope="row" class="text-center">
-                <%= link_to  "Details", rental_path(rental)%>
-                <%= link_to "Adicionar Items", new_rental_rental_item_path(rental), class: "btn btn-success" %>
-                <%= link_to "Payment", new_rental_payment_path(rental)%>
+                <%= link_to  "Details", rental_path(rental), class: "btn btn-primary"%>
+                <%= link_to "Adicionar Items", new_rental_rental_item_path(rental), class: "btn btn-primary" %>
+                <%= link_to "Payment", new_rental_payment_path(rental), class: "btn btn-primary"%>
             </td>
         </tr>
         <%end%>
