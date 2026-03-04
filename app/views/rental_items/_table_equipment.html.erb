@@ -1,68 +1,110 @@
-<h2>Equipment List</h2>
+<h2 class="mb-4 text-success">Equipment List</h2>
 
-<%= form_with url: new_rental_rental_item_path(@rental), method: :get, local:true do %>
-    <div>
-        <%=  label_tag :query, "Search Equipment "%>
-        <%= text_field_tag :query, params[:query], placeholder: "Digite o nome do equipamento"%>
-        <%= submit_tag "Buscar" %>
+<div class="card shadow-sm p-4 mb-4" style="border-left: 5px solid darkseagreen;">
+  
+  <%= form_with url: new_rental_rental_item_path(@rental), method: :get, local: true, class: "row g-3" do %>
+    
+    <div class="col-md-6">
+      <div class="form-floating">
+        <%= text_field_tag :query, params[:query], 
+            class: "form-control", 
+            placeholder: "Digite o nome do equipamento" %>
+        <%= label_tag :query, "Search Equipment" %>
+      </div>
     </div>
-<%end%>
 
-<table class="table">
-    <thead>
-        <tr>
-            <td>Equipment ID</td>
-            <td>Equipment Name</td>
-            <td>Daily Value</td>
-            <td>Status</td>
-            <td>Action</td>
-        </tr>
+    <div class="col-md-2">
+      <%= submit_tag "Buscar", class: "btn btn-primary w-100 h-100" %>
+    </div>
+
+  <% end %>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-hover align-middle shadow-sm">
+    <thead class="table-success">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Daily Value</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
     </thead>
+
     <tbody>
-        <% @equipment.each do |equipment| %>
+      <% @equipment.each do |equipment| %>
         <tr>
-            <td><%= equipment.id %></td>
-            <td><%= equipment&.name %></td>
-            <td><%= equipment.daily_value %></td>
-            <td><%= equipment.status&.humanize %></td>
-            <td>
-                <%= link_to "Add to Rental", "javascript:void(0)", 
-                    onclick: "VerifyStatus('#{equipment.status}', #{equipment.id}, '#{j equipment.name}', #{equipment.daily_value})", 
-                    class: "btn btn-primary" %>
-            </td>
+          <td><%= equipment.id %></td>
+          <td><%= equipment.name %></td>
+          <td>$ <%= equipment.daily_value %></td>
+          <td>
+            <span class="badge 
+              <%= case equipment.status
+                  when "available" then "bg-success"
+                  when "rented" then "bg-danger"
+                  when "unavailable" then "bg-secondary"
+                  when "pending" then "bg-warning text-dark"
+                  end %>">
+              <%= equipment.status.humanize %>
+            </span>
+          </td>
+          <td>
+            <%= link_to "Add to Rental", "#",
+                onclick: "verifyStatus('#{equipment.status}', #{equipment.id}, '#{j equipment.name}', #{equipment.daily_value})",
+                class: "btn btn-primary btn-sm" %>
+          </td>
         </tr>
-        <% end %>
+      <% end %>
     </tbody>
-</table>
+  </table>
+</div>
+
+
 
 <script>
-    function VerifyStatus(status, quipmentId, equipmentName, dailyPrice){
-        if(status == "unavailable" || status == "rented"){
-            document.getElementById("erro").innerText = "Item is unavailable for rent"
-            document.getElementById("rental_item_daily_price").value = ""; 
-        }else{
-            document.getElementById("erro").innerText = "";
-            PrencheForm(quipmentId, equipmentName, dailyPrice);
-            document.getElementById("rental_item_subtotal").value = 
-                        SomaSubtotal(parseFloat(document.getElementById("rental_item_daily_price").value), 
-            document.getElementById("rental_start_date").innerText, 
-            document.getElementById("rental_end_date").innerText);
-        }
-    }
-    function PrencheForm(equipmentId, equipmentName, dailyPrice) {
-        document.getElementById("rental_item_equipment_id").value = equipmentId;
-        document.getElementById("rental_item_name").innerText = equipmentName;
-        document.getElementById("rental_item_daily_price").value = dailyPrice;  
+  function verifyStatus(status, equipmentId, equipmentName, dailyPrice) {
 
+    if (status === "rented" || status === "unavailable") {
+      document.getElementById("erro").innerText = "Item is unavailable for rent";
+      return;
     }
 
-    function SomaSubtotal(dailyValue, start_date, end_date) {
-        var start = new Date(start_date);
-        var end = new Date(end_date);
-        end.setDate(end.getDate() + 1);
-        var timeDiff = Math.abs(start.getTime() - end.getTime());
-        var diffDays = Math.ceil(timeDiff / (1000*3600*24));
-        console.log("O valor mudou para: " + diffDays);
-        return dailyValue * diffDays;
+    if (status === "pending") {
+      document.getElementById("erro").innerText = "Item is pending approval";
+      return;
     }
+
+    // Se for available
+    document.getElementById("erro").innerText = "";
+    fillForm(equipmentId, equipmentName, dailyPrice);
+    calculateSubtotal();
+  }
+
+  function fillForm(equipmentId, equipmentName, dailyPrice) {
+    document.getElementById("rental_item_equipment_id").value = equipmentId;
+    document.getElementById("rental_item_name").innerText = equipmentName;
+    document.getElementById("rental_item_daily_price").value = dailyPrice;
+  }
+
+  function calculateSubtotal() {
+    let dailyValue = parseFloat(document.getElementById("rental_item_daily_price").value);
+    let startDate = document.getElementById("rental_start_date").value;
+    let endDate = document.getElementById("rental_end_date").value;
+
+    if (!startDate || !endDate || !dailyValue) return;
+
+    let start = new Date(startDate);
+    let end = new Date(endDate);
+
+    if (end < start) {
+      document.getElementById("erro").innerText = "End date must be after start date";
+      return;
+    }
+
+    let diffTime = end.getTime() - start.getTime();
+    let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
+    document.getElementById("rental_item_subtotal").value = dailyValue * diffDays;
+  }
 </script>

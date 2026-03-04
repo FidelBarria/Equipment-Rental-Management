@@ -1,12 +1,52 @@
-<h1>New Rental Item</h1>
+<div class="container-fluid mt-4">
 
-<%= link_to "Back", rentals_path %>
+  <!-- HEADER -->
+  <div class="row mb-4">
+    <div class="col">
+      <div class="card shadow-sm border-0" style="background-color: darkseagreen;">
+        <div class="card-body text-white d-flex justify-content-between align-items-center">
+          <h3 class="mb-0">New Rental Item</h3>
+          <%= link_to "Back", rentals_path, class: "btn btn-light btn-sm" %>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <div class="row g-4">
 
-<%= render "table_equipment", equipments: @equipments %>
+    <!-- EQUIPMENTS TABLE -->
+    <div class="col-12 col-lg-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-header text-white" style="background-color: darkseagreen;">
+          <h5 class="mb-0">Available Equipments</h5>
+        </div>
+        <div class="card-body">
+          <%= render "table_equipment", equipments: @equipments %>
+        </div>
+      </div>
+    </div>
 
-<%= render 'form', rental_item: @rental_item %>
+    <!-- FORM + RENTAL ITEMS -->
+    <div class="col-12 col-lg-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-header text-white" style="background-color: darkseagreen;">
+          <h5 class="mb-0">Add Item to Rental</h5>
+        </div>
+        <div class="card-body">
 
-<%= render 'table', rental: @rental %>
+          <div class="mb-4">
+            <%= render 'form', rental_item: @rental_item %>
+          </div>
+
+          <hr>
+
+          <%= render 'table', rental: @rental %>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 
