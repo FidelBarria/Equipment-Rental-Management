@@ -1,48 +1,88 @@
+<div class="container-fluid mt-4">
 
-<div class="card m-3">
-<%= form_with(model: @rental, local: true, class: "form-content") do |form| %>
-    <% if @rental.errors.any? %>
-      <div class="input-group">
-        <h5><%= pluralize(@rental.errors.count, "Errors ") %> please correct the errors below. </h5>
-        <ul>
-          <% @rental.errors.full_messages.each do |message| %>
-            <li><p class="error-messages"><%= message %></p></li>
+  <div class="row justify-content-center">
+
+    <div class="col-12 col-lg-8">
+
+      <div class="card shadow-sm">
+
+        <div class="card-header bg-light">
+          <h4 class="mb-0 text-customized">New Rental</h4>
+        </div>
+
+        <div class="card-body">
+
+          <%= form_with(model: @rental, local: true) do |form| %>
+
+            <% if @rental.errors.any? %>
+              <div class="alert alert-danger">
+                <h5>
+                  <%= pluralize(@rental.errors.count, "Error") %> - Please correct the errors below
+                </h5>
+                <ul class="mb-0">
+                  <% @rental.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <%= form.hidden_field :user_id, value: current_user.id %>
+            <%= form.hidden_field :event_id %>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">Event</label>
+              <p class="form-control-plaintext">
+                <%= @rental.event.name %>
+              </p>
+            </div>
+
+            <div class="form-floating mb-3">
+              <%= form.collection_select :client_id,
+                    Client.all,
+                    :id,
+                    :name,
+                    {},
+                    class: "form-select" %>
+              <label>Client</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <%= form.date_field :start_date, class: "form-control" %>
+              <label>Start Date</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <%= form.date_field :end_date, class: "form-control" %>
+              <label>End Date</label>
+            </div>
+
+            <div class="form-floating mb-4">
+              <%= form.select :status,
+                    Rental.statuses.keys.map { |status| [status.humanize, status] },
+                    {},
+                    class: "form-select" %>
+              <label>Status</label>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+
+              <p class="text-muted mb-0">
+                <strong>User:</strong> <%= current_user.name %>
+              </p>
+
+              <%= form.submit "Create Rental", class: "btn btn-primary" %>
+
+            </div>
+
           <% end %>
-        </ul>
+
+        </div>
+
       </div>
-    <% end %>
-    <h2>New Rental</h2>
-    <div class="input-group">
-      <%= form.hidden_field :user_id, value: current_user.id %>
-    </div>
-    <div class="input-group">
-      <p><%= @rental.event.name %></p>
-    </div>
-    <div class="input-group">
-      <%= form.label :client_id %>
-      <%= form.collection_select :client_id, Client.all, :id, :name %>
-    </div>
-    <div class="input-group">
-      <%= form.hidden_field :event_id %>
-    </div>
-    <div class="input-group">
-      <%= form.label :start_date %>
-      <%= form.date_field :start_date %>
-    </div>
-    <div class="input-group">
-      <%= form.label :end_date %>
-      <%= form.date_field :end_date %>
-    </div>
-    <div class="input-group">
-      <%= form.label :status %>
-      <%= form.select :status, Rental.statuses.keys.map { |status| [status.humanize, status] } %>
+
     </div>
 
-    <div class="actions">
-      <%= form.submit "Create Rental", class: "btn-submit" %> 
-    </div>
-    <div>
-    <p class="foot"><%= current_user.name %></p>
-    <div>
-  <% end %>
+  </div>
+
 </div>

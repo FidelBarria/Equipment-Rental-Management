@@ -1,53 +1,130 @@
+<div class="container-fluid mt-4">
 
-<div class="card m-3">
-    
+  <div class="card shadow-sm border-0">
+
+    <!-- HEADER -->
+    <div class="card-header text-white d-flex justify-content-between align-items-center"
+         style="background-color: darkseagreen;">
+      <h5 class="mb-0">Rentals</h5>
+
+      <a class="btn btn-light btn-sm shadow-sm"
+         data-bs-toggle="collapse"
+         href="#collapseFilter"
+         role="button">
+        Filter
+      </a>
+    </div>
+
     <div class="card-body">
-          <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseFilter" role="button" aria-expanded="false" aria-controls="collapseFilter">
-            <i class="bi bi-filter"></i>
-          </a>
-        <div class="collapse" id="collapseFilter">
-            <div class="card card-body w-50 mb-3">
-                <div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom: 10px">
-                    <%= link_to "All", rentals_path, class: "btn btn-primary"%>
-                    <%= link_to "Active", rentals_path(status: :active), class: "btn btn-primary" %>
-                    <%= link_to "Pending", rentals_path(status: :pending), class: "btn btn-primary" %>
-                    <%= link_to "Completed", rentals_path(status: :completed), class: "btn btn-primary" %>
-                    <%= link_to "Cancelled", rentals_path(status: :cancelled), class: "btn btn-primary" %>
-                </div>
-            </div>
+
+      <!-- FILTER -->
+      <div class="collapse mb-4" id="collapseFilter">
+        <div class="card card-body shadow-sm">
+
+          <div class="btn-group flex-wrap" role="group">
+            <%= link_to "All", rentals_path, class: "btn btn-outline-primary" %>
+            <%= link_to "Active", rentals_path(status: :active), class: "btn btn-outline-primary" %>
+            <%= link_to "Pending", rentals_path(status: :pending), class: "btn btn-outline-primary" %>
+            <%= link_to "Completed", rentals_path(status: :completed), class: "btn btn-outline-primary" %>
+            <%= link_to "Cancelled", rentals_path(status: :cancelled), class: "btn btn-outline-primary" %>
+          </div>
+
         </div>
-        <h1 class="text-center text-customized">Rentals</h1>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col" class="text-center">Client</th>
-            <th scope="col" class="text-center">Event</th>
-            <th scope="col" class="text-center">Rental Date</th>
-            <th scope="col" class="text-center">Return Date</th>
-            <th scope="col" class="text-center">User</th>
-            <th scope="col" class="text-center">Total Value</th>
-            <th scope="col" class="text-center">Status</th>
-            <th scope="col" class="text-center">Actions</th>
-        </tr>
-    </thead>
-    <tbody class="table-group-divider">
-        <% @rentals.each do |rental|%>
-        <tr>
-            <td scope="row" class="text-center"><%= rental.client.name%></td>
-            <td scope="row" class="text-center"><%= rental.event.name%></td>
-            <td scope="row" class="text-center"><%= rental.start_date.strftime("%d/%m/%Y") %></td>
-            <td scope="row" class="text-center"><%= rental.end_date.strftime("%d/%m/%Y") %></td>
-            <td scope="row" class="text-center"><%= rental.user&.name%></td>
-            <td scope="row" class="text-center"><%= rental.total_value %></td>
-            <td scope="row" class="text-center"><%= rental.status.humanize %></td>
-            <td scope="row" class="text-center">
-                <%= link_to  "Details", rental_path(rental), class: "btn btn-primary"%>
-                <%= link_to "Adicionar Items", new_rental_rental_item_path(rental), class: "btn btn-primary" %>
-                <%= link_to "Payment", new_rental_payment_path(rental), class: "btn btn-primary"%>
-            </td>
-        </tr>
-        <%end%>
-    </tbody>
-</table>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-responsive">
+
+        <table class="table table-hover align-middle">
+
+          <thead class="table-light">
+            <tr>
+              <th class="text-center">Client</th>
+              <th class="text-center">Event</th>
+              <th class="text-center">Rental Date</th>
+              <th class="text-center">Return Date</th>
+              <th class="text-center">User</th>
+              <th class="text-center">Total Value</th>
+              <th class="text-center">Status</th>
+              <th class="text-center">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <% @rentals.each do |rental| %>
+
+              <tr>
+
+                <td class="text-center"><%= rental.client.name %></td>
+
+                <td class="text-center"><%= rental.event.name %></td>
+
+                <td class="text-center">
+                  <%= rental.start_date.strftime("%d/%m/%Y") %>
+                </td>
+
+                <td class="text-center">
+                  <%= rental.end_date.strftime("%d/%m/%Y") %>
+                </td>
+
+                <td class="text-center">
+                  <%= rental.user&.name %>
+                </td>
+
+                <td class="text-center">
+                  $ <%= rental.total_value %>
+                </td>
+
+                <td class="text-center">
+
+                <% case rental.status %>
+                <% when "active" %>
+                    <span class="badge bg-success">Active</span>
+
+                <% when "pending" %>
+                    <span class="badge bg-warning text-dark">Pending</span>
+
+                <% when "completed" %>
+                    <span class="badge bg-primary">Completed</span>
+
+                <% when "cancelled" %>
+                    <span class="badge bg-danger">Cancelled</span>
+                <% end %>
+
+                </td>
+
+                <td class="text-center">
+
+                  <div class="btn-group">
+
+                    <%= link_to "Details",
+                        rental_path(rental),
+                        class: "btn btn-sm btn-outline-primary" %>
+
+                    <%= link_to "Items",
+                        new_rental_rental_item_path(rental),
+                        class: "btn btn-sm btn-outline-success" %>
+
+                    <%= link_to "Payment",
+                        new_rental_payment_path(rental),
+                        class: "btn btn-sm btn-outline-dark" %>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            <% end %>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+  </div>
+
 </div>
-</div> 

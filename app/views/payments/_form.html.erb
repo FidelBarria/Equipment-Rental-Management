@@ -1,8 +1,9 @@
 <%= form_with(model: [@rental, @payment], local: true) do |form| %>
+
   <% if @payment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
-      <ul>
+    <div class="alert alert-danger">
+      <h5><%= pluralize(@payment.errors.count, "error") %> prevented this payment from being saved:</h5>
+      <ul class="mb-0">
         <% @payment.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
@@ -10,27 +11,41 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :amount %>
-    <%= form.number_field :amount, value: @rental.total_value, step: 0.01 %>
+  <div class="row g-3">
+
+    <div class="col-md-6">
+      <%= form.label :amount, class: "form-label" %>
+      <%= form.number_field :amount,
+          value: @rental.total_value,
+          step: 0.01,
+          class: "form-control" %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :payment_date, class: "form-label" %>
+      <%= form.date_field :payment_date, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :payment_method, class: "form-label" %>
+      <%= form.select :payment_method,
+          Payment.payment_methods.keys.map { |method| [method.humanize, method] },
+          {},
+          class: "form-select" %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :status, class: "form-label" %>
+      <%= form.select :status,
+          Payment.statuses.keys.map { |status| [status.humanize, status] },
+          {},
+          class: "form-select" %>
+    </div>
+
   </div>
 
-  <div class="field">
-    <%= form.label :payment_date %>
-    <%= form.date_field :payment_date %>
+  <div class="mt-4 d-flex justify-content-end gap-2">
+    <%= form.submit "Create Payment", class: "btn btn-primary" %>
   </div>
 
-  <div class="field">
-    <%= form.label :payment_method %>
-    <%= form.select :payment_method, Payment.payment_methods.keys.map { |method| [method.humanize, method] } %>
-  </div>
-
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.select :status, Payment.statuses.keys.map { |status| [status.humanize, status] } %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Create Payment" %> 
-  </div>
-  <% end %>
+<% end %>

@@ -1,4 +1,4 @@
 <%= form_with url: events_path, method: :get, local: true, class: "row g-3" do |form| %>
     <%= form.text_field :pesquisa, value: params[:pesquisa], class: "form-control mb-2", placeholder: "Search by Name or local"%>
-    <%= form.submit "Pesquisar", class: "btn btn-primary"%>
+    <%= form.submit "Pesquisar", class: "btn btn-secondary"%>
 <%end%>

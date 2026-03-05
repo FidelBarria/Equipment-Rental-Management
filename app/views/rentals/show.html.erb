@@ -1,127 +1,222 @@
-<div class="container text-center">
-    <div class="row">
-        <div class="col">
-            <h1 class="text-customized"><%= @rental.event.name %></h1>
-        </div>
-    </div> 
-</div>
-
 <div class="container-fluid mt-4">
+
+  <!-- HEADER -->
+  <div class="row mb-4">
+    <div class="col text-center">
+      <h2 class="text-customized fw-bold">
+        <%= @rental.event.name %>
+      </h2>
+    </div>
+  </div>
+
   <div class="row g-4">
 
-    <!-- CARD 1 -->
+    <!-- RENTAL INFO -->
     <div class="col-12 col-lg-6">
-      <div class="card h-100 shadow-sm">
+      <div class="card shadow-sm h-100 border-0">
+
+        <div class="card-header bg-light">
+          <h5 class="mb-0">Rental Information</h5>
+        </div>
+
         <div class="card-body">
 
-          <h4 class="text-center mb-4">
-            Client: <%= @rental.client.name %>
-          </h4>
+          <h5 class="text-center mb-4">
+            Client: <strong><%= @rental.client.name %></strong>
+          </h5>
 
           <div class="row text-center">
+
             <div class="col-md-6 mb-3">
-              <p><strong>Event:</strong> <%= @rental.event.name %></p>
+              <strong>Event</strong>
+              <p><%= @rental.event.name %></p>
             </div>
 
             <div class="col-md-6 mb-3">
-              <p><strong>Rental Date:</strong> <%= @rental.start_date.strftime("%d/%m/%Y") %></p>
+              <strong>Rental Date</strong>
+              <p><%= @rental.start_date.strftime("%d/%m/%Y") %></p>
             </div>
 
             <div class="col-md-6 mb-3">
-              <p><strong>Return Date:</strong> <%= @rental.end_date.strftime("%d/%m/%Y") %></p>
+              <strong>Return Date</strong>
+              <p><%= @rental.end_date.strftime("%d/%m/%Y") %></p>
             </div>
 
             <div class="col-md-6 mb-3">
-              <p><strong>Total Value:</strong> <%= number_to_currency(@rental.total_value, unit: "R$ ") %></p>
+              <strong>Total Value</strong>
+              <p><%= number_to_currency(@rental.total_value, unit: "R$ ") %></p>
             </div>
-            
+
             <div class="col-md-6 mb-3">
-              <p><strong>Local:</strong> <%= @rental.event.local %></p>
+              <strong>Location</strong>
+              <p><%= @rental.event.local %></p>
             </div>
+
+            <div class="col-md-6 mb-3">
+              <strong>User</strong>
+              <p><%= @rental.user.name %></p>
+            </div>
+
           </div>
 
           <hr>
 
+          <!-- STATUS -->
           <%= form_with(model: @rental) do |form| %>
-            <div class="d-flex flex-wrap align-items-end gap-3 justify-content-center">
 
-              <div>
+            <div class="row g-3 justify-content-center">
+
+              <div class="col-md-6">
                 <%= form.label :status, class: "form-label fw-bold" %>
+
                 <%= form.select :status,
-                    Rental.statuses.keys.map { |status| [status.humanize, status] },
+                    Rental.statuses.keys.map { |s| [s.humanize, s] },
                     {},
                     class: "form-select" %>
               </div>
 
-              <div>
-                <%= form.submit "Editar Status", class: "btn btn-primary" %>
+              <div class="col-md-4 d-flex align-items-end">
+                <%= form.submit "Update Status",
+                    class: "btn btn-primary w-100" %>
               </div>
 
             </div>
+
           <% end %>
-
-          <hr>
-
-          <p><strong>User:</strong> <%= @rental.user.name %></p>
 
         </div>
       </div>
     </div>
 
-    <!-- CARD 2 -->
+
+    <!-- PAYMENTS -->
     <div class="col-12 col-lg-6">
-      <div class="card h-100 shadow-sm">
+      <div class="card shadow-sm h-100 border-0">
+
+        <div class="card-header bg-light d-flex justify-content-between">
+          <h5 class="mb-0">Payments</h5>
+
+          <%= link_to "Edit",
+              edit_rental_payment_path(@rental),
+              class: "btn btn-sm btn-outline-primary" %>
+        </div>
+
         <div class="card-body">
 
-          <h4 class="mb-4">Payments</h4>
-
           <% if @rental.payments.any? %>
+
             <% @rental.payments.each do |payment| %>
 
               <div class="border rounded p-3 mb-3 bg-light">
-                <p><strong>Status:</strong> <%= payment.status.humanize %></p>
-                <p><strong>Amount:</strong> <%= number_to_currency(payment.amount, unit: "R$ ") %></p>
-                <p><strong>Payment Date:</strong> <%= payment.payment_date.strftime("%d/%m/%Y") %></p>
-                <p><strong>Payment Method:</strong> <%= payment.payment_method.humanize %></p>
+
+                <div class="row">
+
+                  <div class="col-md-6">
+                    <strong>Status</strong>
+                    <p><%= payment.status.humanize %></p>
+                  </div>
+
+                  <div class="col-md-6">
+                    <strong>Amount</strong>
+                    <p><%= number_to_currency(payment.amount, unit: "R$ ") %></p>
+                  </div>
+
+                  <div class="col-md-6">
+                    <strong>Payment Date</strong>
+                    <p><%= payment.payment_date.strftime("%d/%m/%Y") %></p>
+                  </div>
+
+                  <div class="col-md-6">
+                    <strong>Method</strong>
+                    <p><%= payment.payment_method.humanize %></p>
+                  </div>
+
+                </div>
+
               </div>
 
             <% end %>
+
           <% else %>
-            <p>No payments recorded.</p>
-          <% end %>
-            <div class="d-flex justify-content-center mt-3">
-            <%= link_to "Edit Payment", edit_rental_payment_path(@rental), class: "btn btn-primary"%>
+
+            <div class="text-center text-muted">
+              No payments recorded
             </div>
+
+          <% end %>
+
         </div>
       </div>
     </div>
 
   </div>
-</div>
-<div class="card m-3">
-    <div class="card-body">
-        <%= link_to "Adicionar Items", new_rental_rental_item_path(@rental), class: "btn btn-primary" %>
-        <table class="table table-striped">
-            <h2 class="text-center text-customized">Rented Items</h2>
-            <thead>
-                <tr>
-                    <th scope="col" class="text-center">Item</th>
-                    <th scope="col" class="text-center">Quantity</th>
-                    <th scope="col" class="text-center">Unit Price</th>
-                    <th scope="col" class="text-center">Total Price</th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-                <% @rental.rental_items.each do |rental_item| %>
-                <tr>
-                    <td scope="row" class="text-center"><%= rental_item.equipment.name %></td>
-                    <td scope="row" class="text-center"><%= rental_item.quantity %></td>
-                    <td scope="row" class="text-center"><%= rental_item.daily_price %></td>
-                    <td scope="row" class="text-center"><%= rental_item.subtotal %></td>
-                </tr>
-                <% end %>
-            </tbody>
-        </table>
+
+
+  <!-- RENTED ITEMS -->
+  <div class="card shadow-sm border-0 mt-4">
+
+    <div class="card-header d-flex justify-content-between align-items-center">
+
+      <h5 class="mb-0">Rented Items</h5>
+
+      <%= link_to "Add Item",
+          new_rental_rental_item_path(@rental),
+          class: "btn btn-primary btn-sm" %>
+
     </div>
+
+    <div class="card-body">
+
+      <div class="table-responsive">
+
+        <table class="table table-hover align-middle">
+
+          <thead class="table-light">
+
+            <tr>
+              <th class="text-center">Item</th>
+              <th class="text-center">Quantity</th>
+              <th class="text-center">Unit Price</th>
+              <th class="text-center">Total Price</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <% @rental.rental_items.each do |item| %>
+
+              <tr>
+
+                <td class="text-center">
+                  <%= item.equipment.name %>
+                </td>
+
+                <td class="text-center">
+                  <%= item.quantity %>
+                </td>
+
+                <td class="text-center">
+                  <%= number_to_currency(item.daily_price, unit: "R$ ") %>
+                </td>
+
+                <td class="text-center fw-bold">
+                  <%= number_to_currency(item.subtotal, unit: "R$ ") %>
+                </td>
+
+              </tr>
+
+            <% end %>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 

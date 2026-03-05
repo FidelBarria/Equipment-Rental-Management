@@ -1,9 +1,11 @@
-<%= form_with(model: equipment) do |form| %>
-  <% if equipment.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(equipment.errors.count, "error") %> prohibited this equipment from being saved:</h2>
+<%= form_with(model: equipment, local: true) do |form| %>
 
-      <ul>
+  <% if equipment.errors.any? %>
+    <div class="alert alert-danger">
+      <h5>
+        <%= pluralize(equipment.errors.count, "error") %> prohibited this equipment from being saved:
+      </h5>
+      <ul class="mb-0">
         <% equipment.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,27 +13,36 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-floating mb-3">
+    <%= form.text_field :name, class: "form-control", placeholder: "Equipment Name" %>
+    <%= form.label :name, "Equipment Name" %>
   </div>
 
-  <div>
-    <%= form.label :category_id, style: "display: block" %>
-    <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Selecione uma categoria" } %>
+  <div class="form-floating mb-3">
+    <%= form.collection_select :category_id,
+        Category.all,
+        :id,
+        :name,
+        { prompt: "Select Category" },
+        { class: "form-select" } %>
+    <%= form.label :category_id, "Category" %>
   </div>
 
-  <div>
-    <%= form.label :daily_value, style: "display: block" %>
-    <%= form.text_field :daily_value %>
+  <div class="form-floating mb-3">
+    <%= form.number_field :daily_value, step: 0.01, class: "form-control", placeholder: "Daily Value" %>
+    <%= form.label :daily_value, "Daily Price" %>
   </div>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.select :status, Equipment.statuses.keys.map { |status| [status.humanize, status]} %>
+  <div class="form-floating mb-4">
+    <%= form.select :status,
+        Equipment.statuses.keys.map { |status| [status.humanize, status] },
+        {},
+        class: "form-select" %>
+    <%= form.label :status, "Status" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="d-grid">
+    <%= form.submit "Create Equipment", class: "btn btn-primary btn-lg" %>
   </div>
+
 <% end %>

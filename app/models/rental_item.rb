@@ -5,7 +5,7 @@ class RentalItem < ApplicationRecord
   validate :check_equipment_availability
 
   after_save :update_rental_total_value, :update_equipment_status
-  after_destroy :update_rental_total_value
+  after_destroy :update_rental_total_value, :update_equipment_status_when_delete
 
 
   private
@@ -22,13 +22,17 @@ class RentalItem < ApplicationRecord
     rental.calculate_total_value!
   end
 
+  def update_equipment_status_when_delete
+    equipment.update(status: :available)
+  end
+
   def update_equipment_status
     case rental.status
     when "pending"
       equipment.update(status: :pending)
 
     when "active"
-      equipment.update(status: :unavailable)
+      equipment.update(status: :rented)
 
     when "completed", "cancelled"
       equipment.update(status: :available)

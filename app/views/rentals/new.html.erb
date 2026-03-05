@@ -1,8 +1,35 @@
+<% content_for :title, "Edit Rental" %>
 
+<div class="container-fluid mt-4">
 
-<%= render 'form', rental: @rental %>
+  <div class="row justify-content-center">
 
-<div class="menu_bottom">
-<%= link_to "Back", events_path, class: "button-group" %>
+    <div class="col-12 col-lg-8">
+
+      <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-light">
+          <h4 class="mb-0">Edit Rental</h4>
+        </div>
+
+        <div class="card-body">
+
+          <%= render 'form', rental: @rental %>
+
+        </div>
+
+        <div class="card-footer d-flex justify-content-end">
+
+          <%= link_to "Back",
+              rentals_path,
+              class: "btn btn-outline-secondary" %>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
-

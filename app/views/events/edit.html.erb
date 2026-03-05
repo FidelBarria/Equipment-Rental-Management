@@ -1,12 +1,39 @@
-<% content_for :title, "Editing event" %>
+<% content_for :title, "Editing Event" %>
 
-<h1>Editing event</h1>
+<div class="container-fluid mt-4">
 
-<%= render "form", event: @event %>
+  <div class="row justify-content-center">
 
-<br>
+    <div class="col-12 col-lg-8">
 
-<div>
-  <%= link_to "Show this event", @event %> |
-  <%= link_to "Back to events", events_path %>
+      <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-light">
+          <h4 class="mb-0">Edit Event</h4>
+        </div>
+
+        <div class="card-body">
+
+          <%= render "form", event: @event %>
+
+        </div>
+
+        <div class="card-footer d-flex justify-content-between">
+
+          <%= link_to "View Event",
+              @event,
+              class: "btn btn-outline-primary" %>
+
+          <%= link_to "Back to Events",
+              events_path,
+              class: "btn btn-outline-secondary" %>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>

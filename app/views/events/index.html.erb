@@ -1,11 +1,27 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Events" %>
 
-<%= link_to "New event", new_event_path, class: "button-group" %>
+<div class="container-fluid mt-4">
 
-<%= render "table_events" %>
+  <div class="card shadow-sm">
+
+    <!-- HEADER -->
+    <div class="card-header text-white d-flex justify-content-between align-items-center"
+         style="background-color: darkseagreen;">
+
+      <h4 class="mb-0">Events</h4>
+
+      <%= link_to "New Event", new_event_path, class: "btn btn-light shadow-sm" %>
+
+    </div>
+
+    <!-- BODY -->
+    <div class="card-body">
+
+      <%= render "table_events" %>
+
+    </div>
+
+  </div>
 
 </div>
-
 

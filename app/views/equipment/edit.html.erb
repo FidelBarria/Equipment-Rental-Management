@@ -1,12 +1,35 @@
-<% content_for :title, "Editing equipment" %>
+<% content_for :title, "Editing Equipment" %>
 
-<h1>Editing equipment</h1>
+<div class="container-fluid mt-4">
 
-<%= render "form", equipment: @equipment %>
+  <div class="card shadow-sm">
 
-<br>
+    <div class="card-header text-white"
+         style="background-color: darkseagreen;">
+      <h3 class="mb-0">Edit Equipment</h3>
+    </div>
 
-<div>
-  <%= link_to "Show this equipment", @equipment %> |
-  <%= link_to "Back to equipment", equipment_index_path %>
+    <div class="card-body">
+
+      <%= render "form", equipment: @equipment %>
+
+      <hr>
+
+      <div class="d-flex justify-content-center gap-3">
+
+        <%= link_to "View Equipment",
+            @equipment,
+            class: "btn",
+            style: "background-color: darkseagreen; color:white;" %>
+
+        <%= link_to "Back to Equipment",
+            equipment_index_path,
+            class: "btn btn-outline-secondary" %>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>

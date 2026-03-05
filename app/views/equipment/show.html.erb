@@ -1,10 +1,66 @@
-<p style="color: green"><%= notice %></p>
+<p class="text-success text-center"><%= notice %></p>
 
-<%= render @equipment %>
+<div class="container mt-4">
 
-<div>
-  <%= link_to "Edit this equipment", edit_equipment_path(@equipment) %> |
-  <%= link_to "Back to equipment", equipment_index_path %>
+  <div class="card shadow-sm">
 
-  <%= button_to "Destroy this equipment", @equipment, method: :delete %>
+    <div class="card-header text-white"
+         style="background-color: darkseagreen;">
+      <h3 class="mb-0">Equipment Details</h3>
+    </div>
+
+    <div class="card-body">
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <strong>Name:</strong>
+          <p><%= @equipment.name %></p>
+        </div>
+
+        <div class="col-md-6">
+          <strong>Category:</strong>
+          <p><%= @equipment.category&.name %></p>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <strong>Daily Value:</strong>
+          <p><%= number_to_currency(@equipment.daily_value) %></p>
+        </div>
+
+        <div class="col-md-6">
+          <strong>Status:</strong>
+          <span class="badge"
+                style="background-color: darkseagreen;">
+            <%= @equipment.status&.humanize %>
+          </span>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="d-flex gap-2 justify-content-center">
+
+        <%= link_to "Edit",
+            edit_equipment_path(@equipment),
+            class: "btn",
+            style: "background-color: darkseagreen; color:white;" %>
+
+        <%= link_to "Back",
+            equipment_index_path,
+            class: "btn btn-outline-secondary" %>
+
+        <%= button_to "Delete",
+            @equipment,
+            method: :delete,
+            data: { confirm: "Are you sure?" },
+            class: "btn btn-danger" %>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>

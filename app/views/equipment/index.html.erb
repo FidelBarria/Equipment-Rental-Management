@@ -1,10 +1,33 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Equipment" %>
 
+<div class="container-fluid mt-4">
 
-<%= link_to "New equipment", new_equipment_path, class: "button-group" %>
+  <% if notice.present? %>
+    <div class="alert alert-success text-center">
+      <%= notice %>
+    </div>
+  <% end %>
 
-<%= render "table_equipment" %>
+  <div class="card shadow-sm">
+
+    <div class="card-body">
+
+      <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h1 class="text-customized mb-0">Equipment</h1>
+
+        <%= link_to "New Equipment",
+            new_equipment_path,
+            class: "btn btn-primary" %>
+
+      </div>
+
+      <%= render "table_equipment" %>
+
+    </div>
+
+  </div>
+
+</div>
 
 

@@ -27,7 +27,7 @@
           <tbody>
             <% if @rental.rental_items.any? %>
 
-              <% @rental.rental_items.each do |rental_item| %>
+              <% @rental.rental_items.where.not(id: nil).each do |rental_item| %>
                 <tr>
                   <td><%= rental_item.equipment_id %></td>
 
@@ -52,10 +52,17 @@
                   </td>
 
                   <td class="text-center">
-                    <%= link_to "Delete",
-                        [@rental, rental_item],
-                        data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-                        class: "btn btn-danger btn-sm shadow-sm" %>
+                  <% if @rental.status != "cancelled" && @rental.status != "completed" %>
+                  <%= button_to "Delete",
+                    [@rental, rental_item],
+                    method: :delete,
+                    class: "btn btn-danger btn-sm shadow-sm",
+                    form: { data: { turbo_confirm: "Are you sure?" } } %>
+                  <%else%>
+                    <div class="alert alert-danger">
+                      disabled.
+                    </div>
+                  <%end%>
                   </td>
                 </tr>
               <% end %>

@@ -1,26 +1,28 @@
-<h1>Clients</h1>
+<% content_for :title, "Clients" %>
 
-<%= link_to "New Clients", new_client_path%>
+<div class="container-fluid mt-4">
 
-<table class="table">
-    <thead>
-        <tr>
-            <td>Name</td>
-            <td>CPF/CNPJ</td>
-            <td>Email</td>
-            <td>Adress</td>
-            <td>Phone</td>
-        </tr>
-    </thead>
-    <tbody>
-        <% @clients.each do |client|%>
-        <tr>
-            <td><%= client.name%></td>
-            <td><%= client.cpf_cnpj%></td>
-            <td><%= client.email%></td>
-            <td><%= client.address%></td>
-            <td><%= client.phone%></td>
-        </tr>
-        <%end%>
-    </tbody>
-</table>
+  <div class="card shadow-sm border-0">
+
+    <!-- HEADER -->
+    <div class="card-header text-white d-flex justify-content-between align-items-center"
+         style="background-color: darkseagreen;">
+      
+      <h5 class="mb-0">Clients</h5>
+
+      <%= link_to "New Client",
+          new_client_path,
+          class: "btn btn-light btn-sm shadow-sm" %>
+
+    </div>
+
+    <!-- BODY -->
+    <div class="card-body">
+
+      <%= render "clients_table" %>
+
+    </div>
+
+  </div>
+
+</div>

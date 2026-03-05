@@ -63,6 +63,7 @@
 
 
 <script>
+
   function verifyStatus(status, equipmentId, equipmentName, dailyPrice) {
 
     if (status === "rented" || status === "unavailable") {
@@ -88,9 +89,20 @@
   }
 
   function calculateSubtotal() {
+  let dailyPriceField = document.getElementById("rental_item_daily_price");
+  let startDateField = document.getElementById("rental_start_date");
+  let endDateField = document.getElementById("rental_end_date");
+  let subtotalField = document.getElementById("rental_item_subtotal");
+
+  if (!dailyPriceField || !startDateField || !endDateField || !subtotalField) {
+    console.log("Algum campo não foi encontrado no HTML");
+    return;
+  }
+
+
     let dailyValue = parseFloat(document.getElementById("rental_item_daily_price").value);
-    let startDate = document.getElementById("rental_start_date").value;
-    let endDate = document.getElementById("rental_end_date").value;
+    let startDate = document.getElementById("rental_start_date").innerText;
+    let endDate = document.getElementById("rental_end_date").innerText;
 
     if (!startDate || !endDate || !dailyValue) return;
 
