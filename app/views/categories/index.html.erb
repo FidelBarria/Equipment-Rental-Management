@@ -9,9 +9,9 @@
 
       <h3 class="mb-0">Categories</h3>
 
-      <%= link_to "New Category",
-          new_category_path,
-          class: "btn btn-light btn-sm fw-semibold" %>
+      <button type="button" class="btn btn-light btn-sm fw-semibold" data-bs-toggle="modal" data-bs-target="#modalNewCategory">
+          New Category
+      </button>
 
     </div>
 
@@ -55,6 +55,29 @@
   </div>
 
 </div>
+
+<div class="modal fade" id="modalNewCategory" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title text-customized">New Category</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= turbo_frame_tag "form_new_category", src: new_category_path, loading: "lazy" %>
+      </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
+
+<script>
+    var meuModal = new bootstrap.Modal(document.getElementById('modalNewCategory'));
+    meuModal.show();
+</script>
+
 
 
 

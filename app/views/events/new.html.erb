@@ -1,9 +1,7 @@
-<div class="container mt-4">
 
-  <div class="card shadow-sm">
-    
+<%= turbo_frame_tag "form_new_event" do %>
     <div class="card-header text-white" style="background-color: darkseagreen;">
-      <h3 class="mb-0">Create New Event</h3>
+      <h3 class="mb-3">Create New Event</h3>
     </div>
 
     <div class="card-body">
@@ -15,7 +13,4 @@
       <%= link_to "← Back to events", events_path, class: "btn btn-outline-secondary" %>
 
     </div>
-
-  </div>
-
-</div>
+<%end%>

@@ -9,18 +9,19 @@
   <% end %>
 
   <div class="card shadow-sm">
-
-    <div class="card-body">
+    <div class="card-header text-white" style="background-color: darkseagreen;">
 
       <div class="d-flex justify-content-between align-items-center mb-4">
 
-        <h1 class="text-customized mb-0">Equipment</h1>
+        <h1 class="mb-0">Equipment</h1>
 
-        <%= link_to "New Equipment",
-            new_equipment_path,
-            class: "btn btn-primary" %>
+      <button type="button" class="btn btn-light btn-sm fw-semibold" data-bs-toggle="modal" data-bs-target="#modalNewEquipment">
+          New Equipment
+      </button>
 
       </div>
+    </div>      
+    <div class="card-body">
 
       <%= render "table_equipment" %>
 
@@ -30,4 +31,24 @@
 
 </div>
 
+<div class="modal fade" id="modalNewEquipment" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title text-customized">New Category</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= turbo_frame_tag "form_new_equipment", src: new_equipment_path, loading: "lazy" %>
+      </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
 
+<script>
+    var meuModal = new bootstrap.Modal(document.getElementById('modalNewEquipment'));
+    meuModal.show();
+</script>

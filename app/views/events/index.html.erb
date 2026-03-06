@@ -10,7 +10,9 @@
 
       <h4 class="mb-0">Events</h4>
 
-      <%= link_to "New Event", new_event_path, class: "btn btn-light shadow-sm" %>
+      <button type="button" class="btn btn-light btn-sm fw-semibold" data-bs-toggle="modal" data-bs-target="#modalNewEvent">
+          New Event
+      </button>
 
     </div>
 
@@ -25,3 +27,25 @@
 
 </div>
 
+<div class="modal fade" id="modalNewEvent" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title text-customized">New Category</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= turbo_frame_tag "form_new_event", src: new_event_path, loading: "lazy" %>
+      </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
+
+
+<script>
+    var meuModal = new bootstrap.Modal(document.getElementById('modalNewEvent'));
+    meuModal.show();
+</script>

@@ -10,9 +10,9 @@
       
       <h5 class="mb-0">Clients</h5>
 
-      <%= link_to "New Client",
-          new_client_path,
-          class: "btn btn-light btn-sm shadow-sm" %>
+      <button type="button" class="btn btn-light btn-sm fw-semibold" data-bs-toggle="modal" data-bs-target="#modalNewClient">
+          New Client
+      </button>
 
     </div>
 
@@ -26,3 +26,25 @@
   </div>
 
 </div>
+
+<div class="modal fade" id="modalNewClient" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title text-customized">New Category</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= turbo_frame_tag "form_new_client", src: new_client_path, loading: "lazy" %>
+      </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
+
+<script>
+    var meuModal = new bootstrap.Modal(document.getElementById('modalNewClient'));
+    meuModal.show();
+</script>

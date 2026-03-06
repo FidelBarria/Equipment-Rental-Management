@@ -37,6 +37,14 @@ class RentalsController < ApplicationController
     end
   end
 
+  def pdf
+    @rental = Rental.find(params[:id])
+
+        render pdf: "rental_report",
+              template: "rentals/pdf",
+              layout: "pdf"
+  end
+
   private
   def rental_item_params
   params.require(:rental_item).permit(:rental_id)
