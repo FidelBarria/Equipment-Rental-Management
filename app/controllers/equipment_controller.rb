@@ -3,10 +3,10 @@ class EquipmentController < ApplicationController
 
   # GET /equipment or /equipment.json
   def index
-    if params[:query].present?
-      @equipment = Equipment.by_name(params[:query])
+    @equipment = if params[:query].present?
+                    Equipment.by_name(params[:query])
     else
-      @equipment = Equipment.all
+                    Equipment.order(:category_id)
     end
   end
 

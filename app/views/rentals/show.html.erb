@@ -78,7 +78,9 @@
               <div class="col-md-4 d-flex align-items-end">
                 <%= form.submit "Update Status",
                     class: "btn btn-primary w-100" %>
-                    <button onclick="window.print(); return false;">Print this Page</button>
+                <button type="button" class="btn btn-light btn-sm fw-semibold" data-bs-toggle="modal" data-bs-target="#modalEventDetails">
+                    Print Details
+                </button>
               </div>
 
             </div>
@@ -220,4 +222,28 @@
   </div>
 
 </div>
+
+
+<div class="modal fade" id="modalEventDetails" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title text-customized">Details</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= turbo_frame_tag "form_event_details", src: show_details_print_rental_path, loading: "lazy" %>
+      </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
+
+
+<script>
+    var meuModal = new bootstrap.Modal(document.getElementById('modalNewEvent'));
+    meuModal.show();
+</script>
 

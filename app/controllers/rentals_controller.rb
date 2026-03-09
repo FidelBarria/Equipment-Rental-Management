@@ -1,13 +1,15 @@
 class RentalsController < ApplicationController
   def index
-    if params[:status].present?
-      @rentals = Rental.by_status(params[:status])
-    else
-      @rentals = Rental.all
-    end
+@rentals = Rental.all
+@rentals = @rentals.by_status(params[:status]) if params[:status].present?
+@rentals = @rentals.start_date(params[:start_date]) if params[:start_date].present?
   end
 
   def show
+    @rental = Rental.find(params[:id])
+  end
+
+  def show_details_print
     @rental = Rental.find(params[:id])
   end
 

@@ -1,0 +1,56 @@
+<div class="container-fluid mt-4">
+
+  <div class="card shadow-sm border-0">
+
+    <!-- HEADER -->
+    <div class="card-header text-white"
+         style="background-color: darkseagreen;">
+      <h5 class="mb-0">Equipments by Category</h5>
+    </div>
+
+    <div class="card-body">
+
+      <div class="row g-4">
+
+        <% @equipments_by_category = Equipment.available.joins(:category).group("categories.name").count %>
+
+        <% @equipments_by_category.each do |category, total| %>
+
+          <div class="col-12 col-md-6 col-lg-3">
+
+            <div class="card shadow-sm border-0 h-100">
+
+              <div class="card-body text-center">
+
+                <h6 class="text-muted mb-2">
+                  Category
+                </h6>
+
+                <h5 class="fw-bold">
+                  <%= category %>
+                </h5>
+
+                <hr>
+
+                <h2 class="fw-bold text-success">
+                  <%= total %>
+                </h2>
+
+                <p class="text-muted mb-0">
+                  equipments available
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        <% end %>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

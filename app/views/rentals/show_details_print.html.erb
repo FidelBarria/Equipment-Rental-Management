@@ -1,0 +1,141 @@
+<%= turbo_frame_tag "form_event_details" do %>  
+<div class="container mt-4">
+
+  <!-- HEADER -->
+  <div class="text-center mb-4">
+    <h2 style="color: darkseagreen;">Equipment Rental Report</h2>
+    <button onclick="window.print(); return false;" class="btn btn-primary">Print this Page</button>
+    <hr>
+  </div>
+
+  <!-- EVENT INFO -->
+  <div class="card shadow-sm border-0 mb-4">
+
+    <div class="card-header text-white"
+         style="background-color: darkseagreen;">
+      Event Information
+    </div>
+
+    <div class="card-body">
+
+      <div class="row">
+
+        <div class="col-md-6">
+          <strong>Event:</strong>
+          <p><%= @rental.event.name %></p>
+        </div>
+
+        <div class="col-md-6">
+          <strong>Location:</strong>
+          <p><%= @rental.event.local %></p>
+        </div>
+
+        <div class="col-md-4">
+          <strong>Rental Date:</strong>
+          <p><%= @rental.start_date.strftime("%d/%m/%Y") %></p>
+        </div>
+
+        <div class="col-md-4">
+          <strong>Return Date:</strong>
+          <p><%= @rental.end_date.strftime("%d/%m/%Y") %></p>
+        </div>
+
+        <div class="col-md-4">
+          <strong>Responsible User:</strong>
+          <p><%= @rental.user.name %></p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EQUIPMENT LIST -->
+  <div class="card shadow-sm border-0 mb-4">
+
+    <div class="card-header text-white"
+         style="background-color: darkseagreen;">
+      Equipment List
+    </div>
+
+    <div class="card-body">
+
+      <table class="table table-bordered text-center">
+
+        <thead class="table-light">
+          <tr>
+            <th>Equipment</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <% @rental.rental_items.each do |item| %>
+
+            <tr>
+              <td><%= item.equipment.name %></td>
+
+              <td>
+                <%= item.quantity %>
+              </td>
+
+              <td>
+                <%= number_to_currency(item.daily_price, unit: "R$ ") %>
+              </td>
+
+              <td class="fw-bold">
+                <%= number_to_currency(item.subtotal, unit: "R$ ") %>
+              </td>
+            </tr>
+
+          <% end %>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+  <!-- TOTAL VALUE -->
+  <div class="card shadow-sm border-0 mb-4">
+
+    <div class="card-body text-end">
+
+      <h4>
+        Total Rental Value:
+        <span style="color: darkseagreen;">
+          <%= number_to_currency(@rental.total_value, unit: "R$ ") %>
+        </span>
+      </h4>
+
+    </div>
+
+  </div>
+
+  <!-- SIGNATURE -->
+  <div class="row mt-5">
+
+    <div class="col-md-6 text-center">
+      <hr>
+      Operator Signature
+    </div>
+
+    <div class="col-md-6 text-center">
+      <hr>
+      Client Signature
+    </div>
+
+  </div>
+
+</div>
+<%end%>
+
+
+
+
+

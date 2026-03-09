@@ -195,3 +195,23 @@ dialog::backdrop {
   background-color: darkseagreen !important;
   opacity: 0.7 !important;
 }
+
+@media print {
+  /* Esconde todos os elementos do body */
+  body * {
+    visibility: hidden;
+  }
+  
+  /* Torna o modal e seu conteúdo visíveis */
+  #modalEventDetails * {
+    visibility: visible;
+  }
+  
+  /* Posiciona o modal no topo da página impressa */
+  #modalEventDetails {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
