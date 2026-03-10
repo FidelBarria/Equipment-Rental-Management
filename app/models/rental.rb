@@ -20,7 +20,7 @@ class Rental < ApplicationRecord
 
   scope :by_status, ->(status) { where(status: status) }
 
-  scope :start_date, ->(start_date) { where(start_date: start_date) }
+  scope :start_date, ->(start_date) { where(start_date: start_date, status: [ :pending, :active ]) }
 
   def calculate_total_value!
     update!(total_value: rental_items.sum(:subtotal))
