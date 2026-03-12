@@ -18,7 +18,7 @@ end
   end
 
   def redirect_if_logged_in
-    redirect_to root_path if logged_in?
+    redirect_to dashboards_path if logged_in?
   end
 
   private
@@ -26,7 +26,7 @@ end
   def require_user
     if !logged_in?
       flash[:alert] = "Você precisa estar logado para acessar esta página."
-      redirect_to login_path # Garante que vai para a tela de login
+      redirect_to root_path # volta pra landingpage
     end
   end
 end

@@ -1,23 +1,276 @@
-<div class="container-fluid mt-4">
+<!-- HERO -->
+<section class="py-5 text-center text-white" style="background-color: darkseagreen;">
+  <div class="container">
 
-  <h1 class="text-2xl font-bold mb-6">
-    Dashboard de Aluguéis
-  </h1>
+    <h1 class="display-5 fw-bold">
+      Sistema de Gestão para Aluguel de Equipamentos para Eventos
+    </h1>
 
-  <!-- Cards de resumo -->
-  <div class="mb-8">
-    <%= render "card_equipment_available" %>
+    <p class="lead mt-3">
+      Controle locações, equipamentos, pagamentos e eventos em um único lugar.
+    </p>
+
+    <div class="mt-4">
+
+      <%= link_to "Criar Conta",
+          "#",
+          class: "btn btn-light btn-lg me-3" %>
+
+      <%= link_to "Login",
+          login_path,
+          class: "btn btn-outline-light btn-lg" %>
+
+    </div>
+
   </div>
+</section>
 
-  <!-- Tabela de alugueis -->
-  <div class="bg-white shadow rounded-lg p-4">
-    <h2 class="text-lg font-semibold mb-4">
-      Aluguéis de Hoje
-    </h2>
 
-    <%= turbo_frame_tag "table_rental", src: rentals_path(start_date: Date.today) %>
+<!-- BENEFITS -->
+<section class="py-5">
+  <div class="container">
+
+    <h2 class="text-center mb-5">Por que usar nosso sistema?</h2>
+
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 card-hover">
+          <div class="card-body text-center">
+
+            <h4>Gestão Completa</h4>
+
+            <p>
+              Controle equipamentos, categorias, clientes,
+              eventos e locações de forma simples.
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 card-hover">
+          <div class="card-body text-center">
+
+            <h4>Controle Financeiro</h4>
+
+            <p>
+              Acompanhe pagamentos, valores das locações
+              e histórico financeiro.
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0 card-hover">
+          <div class="card-body text-center">
+
+            <h4>Relatórios Inteligentes</h4>
+
+            <p>
+              Visualize relatórios e indicadores para
+              melhorar a gestão do seu negócio.
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
 
   </div>
+</section>
 
-</div>
 
+<!-- FEATURES -->
+<section class="py-5 text-white" style="background-color:#2f6f5e;">
+  <div class="container">
+
+    <h2 class="text-center mb-5">Recursos do Sistema</h2>
+
+    <div class="row g-4">
+
+      <div class="col-md-3">
+        <div class="text-center">
+          <h4>Eventos</h4>
+          <p>Gerencie eventos e reservas.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="text-center">
+          <h4>Equipamentos</h4>
+          <p>Controle estoque e disponibilidade.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="text-center">
+          <h4>Clientes</h4>
+          <p>Cadastro completo de clientes.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="text-center">
+          <h4>Pagamentos</h4>
+          <p>Controle financeiro integrado.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- PRICING -->
+<section class="py-5">
+  <div class="container">
+
+    <h2 class="text-center mb-5">Planos</h2>
+
+    <div class="row g-4">
+
+      <!-- BASIC -->
+      <div class="col-md-4">
+        <div class="card shadow border-0 card-hover">
+
+          <div class="card-body text-center">
+
+            <h4>Básico</h4>
+
+            <h2 class="text-success">R$49</h2>
+
+            <p>/mês</p>
+
+            <ul class="list-unstyled">
+              <li>Gestão de equipamentos</li>
+              <li>Cadastro de clientes</li>
+              <li>Relatórios básicos</li>
+            </ul>
+
+            <%= link_to "Contratar",
+                "#",
+                class: "btn btn-success mt-3" %>
+
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- PRO -->
+      <div class="col-md-4">
+        <div class="card shadow border-0 card-hover">
+
+          <div class="card-body text-center">
+
+            <h4>Profissional</h4>
+
+            <h2 class="text-success">R$99</h2>
+
+            <p>/mês</p>
+
+            <ul class="list-unstyled">
+              <li>Todos recursos básicos</li>
+              <li>Gestão financeira</li>
+              <li>Relatórios avançados</li>
+            </ul>
+
+            <%= link_to "Contratar",
+                "#",
+                class: "btn btn-success mt-3" %>
+
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ENTERPRISE -->
+      <div class="col-md-4">
+        <div class="card shadow border-0 card-hover">
+
+          <div class="card-body text-center">
+
+            <h4>Enterprise</h4>
+
+            <h2 class="text-success">R$199</h2>
+
+            <p>/mês</p>
+
+            <ul class="list-unstyled">
+              <li>Usuários ilimitados</li>
+              <li>Relatórios completos</li>
+              <li>Suporte prioritário</li>
+            </ul>
+
+            <%= link_to "Contratar",
+                "#",
+                class: "btn btn-success mt-3" %>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section class="py-5 text-center text-white" style="background-color: darkseagreen;">
+  <div class="container">
+
+    <h2>Pronto para organizar suas locações?</h2>
+
+    <%= link_to "Criar Conta Agora",
+        "#",
+        class: "btn btn-light btn-lg mt-3" %>
+
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="py-4 text-white" style="background-color:#1f4f43;">
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <h5>Sobre</h5>
+        <p>Sistema de gestão para empresas de locação de equipamentos para eventos.</p>
+      </div>
+
+      <div class="col-md-4">
+        <h5>Links</h5>
+        <ul class="list-unstyled">
+          <li>Fale conosco</li>
+          <li>Trabalhe conosco</li>
+          <li>Política de privacidade</li>
+        </ul>
+      </div>
+
+      <div class="col-md-4">
+        <h5>Contato</h5>
+        <p>Email: contato@sistema.com</p>
+        <p>Telefone: (11) 99999-9999</p>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div class="text-center">
+      © 2026 Sistema de Aluguel de Equipamentos
+    </div>
+
+  </div>
+</footer>

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :clients
   resources :home, only: [ :index ]
+  resources :dashboards
 
   # Recursos Aninhados (Nested Resources)
   resources :rentals do

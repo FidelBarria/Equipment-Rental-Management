@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-def index
-  @equipment = Equipment.by_name(params[:query]).order(:category_id)
-end
+  skip_before_action :require_user, only: [ :index ]
+  def index
+  end
 end
