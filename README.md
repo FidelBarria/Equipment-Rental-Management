@@ -1,24 +1,50 @@
-# README
+## Equipment Rental Management
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Sistema web para gerenciamento de aluguel de equipamentos para eventos.
 
-Things you may want to cover:
+## 📌 Sobre o projeto
 
-* Ruby version
+Aplicação desenvolvida para facilitar o controle de equipamentos, categorias e usuários em um contexto de locação para eventos.
 
-* System dependencies
+O sistema permite organizar o inventário e gerenciar operações básicas de forma simples e eficiente.
 
-* Configuration
+## 🚀 Tecnologias utilizadas
 
-* Database creation
+- Ruby on Rails
+- Ruby
+- HTML / CSS
+- Bootstrap
+- SQLite / PostgreSQL
 
-* Database initialization
+## ⚙️ Funcionalidades
 
-* How to run the test suite
+- Cadastro e gerenciamento de equipamentos
+- Organização por categorias
+- CRUD completo (Create, Read, Update, Delete)
+- Interface com formulários dinâmicos
+- Estrutura preparada para expansão (locações, dashboard, API)
 
-* Services (job queues, cache servers, search engines, etc.)
+## 🧠 Arquitetura
 
-* Deployment instructions
+O projeto segue o padrão MVC do Ruby on Rails:
 
-* ...
+- **Models**: regras de negócio e persistência
+- **Views**: interface com o usuário
+- **Controllers**: controle de fluxo da aplicação
+
+## 📈 Próximas melhorias
+
+- Implementação de locações (Rental)
+- Controle de disponibilidade por data
+- Dashboard com métricas
+- Sistema de autenticação e permissões
+- API REST para integração externa
+
+## 💡 Objetivo
+
+Este projeto foi desenvolvido com foco em aprendizado e evolução como desenvolvedor, aplicando boas práticas de desenvolvimento web e arquitetura com Ruby on Rails.
+
+## 👨‍💻 Autor
+
+Desenvolvido por Fidel Barria  
+[LinkedIn](#) • [GitHub](https://github.com/FidelBarria)
