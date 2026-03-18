@@ -12,13 +12,13 @@
 
     <div class="mt-4">
 
-      <%= link_to "Criar Conta",
+      <%= link_to "Criar Conta Agora",
           "#",
-          class: "btn btn-light btn-lg me-3" %>
+          class: "btn btn-light btn-lg mt-3", data: {bs_toggle: "modal", bs_target: "#modalNewUser"} %>
 
       <%= link_to "Login",
           login_path,
-          class: "btn btn-outline-light btn-lg" %>
+          class: "btn btn-outline-light btn-lg mt-3" %>
 
     </div>
 
@@ -230,10 +230,9 @@
 
     <h2>Pronto para organizar suas locações?</h2>
 
-    <%= link_to "Criar Conta Agora",
-        "#",
-        class: "btn btn-light btn-lg mt-3" %>
-
+    <button type="button" class="btn btn-light btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#modalNewUser">
+      Criar Conta Agora
+    </button>
   </div>
 </section>
 
@@ -274,3 +273,26 @@
 
   </div>
 </footer>
+
+<div class="modal fade" id="modalNewUser" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title text-customized">New Category</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= turbo_frame_tag "new_user_frame", src: signup_path, loading: "lazy" %>
+      </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
+
+
+<script>
+    var meuModal = new bootstrap.Modal(document.getElementById('modalNewUser'));
+    meuModal.show();
+</script>

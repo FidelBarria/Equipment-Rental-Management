@@ -60,7 +60,7 @@
 
           <li>
             <%= link_to "Meu Perfil",
-                "#",
+                user_path(current_user),
                 class: "dropdown-item" %>
           </li>
 
@@ -90,7 +90,7 @@
 </div>
 
   <div class="menu_top">
-      <%= link_to "Home", root_path, class: "btn btn-primary" %>
+      <%= link_to "Home", dashboards_path, class: "btn btn-primary" %>
       <div class="dropdown"> 
         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Rentals</button>
           <ul class="dropdown-menu" style="background-color: darkseagreen">
@@ -108,7 +108,6 @@
         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Registration</button>
           <ul class="dropdown-menu" style="background-color: darkseagreen">
             <li><%= link_to "Clients", clients_path, class: "dropdown-item text-white" %></li>
-            <li><%= link_to "Users", users_path, class: "dropdown-item text-white" %></li>
             <li><%= link_to "Equipments", equipment_index_path, class: "dropdown-item text-white" %></li>
             <li><%= link_to "Categories", categories_path, class: "dropdown-item text-white" %></li>
           </ul>

@@ -1,5 +1,5 @@
        
-<%= form_with model: user do |form|%>
+<%= form_with model: user, data: { turbo_frame: "new_user_frame" } do |form|%>
     <% if user.errors.any? %>
         <div class="alert alert-danger">
             <ul>

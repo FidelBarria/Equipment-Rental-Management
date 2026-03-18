@@ -1,32 +1,33 @@
 class RentalItemsController < ApplicationController
   before_action :set_rental
+
   def index
-    @rental_items = RentalItem.all
+    @rental_items = @rental.rental_items
   end
+
   def new
     @rental_item = @rental.rental_items.build
-    if params[:query].present?
-      @equipment = Equipment.by_name(params[:query])
-    else
-      @equipment = Equipment.all
-    end
+    @equipment = if params[:query].present?
+                   Equipment.by_name(params[:query])
+                 else
+                   Equipment.available_for_rental
+                 end
   end
+
   def create
-    @rental = Rental.find(params[:rental_id])
     @rental_item = @rental.rental_items.build(rental_item_params)
     if @rental_item.save
-      redirect_to new_rental_rental_item_path(@rental), notice: "Rental item was successfully created."
+      redirect_to new_rental_rental_item_path(@rental), notice: "Item added to rental successfully."
     else
-      @equipment = Equipment.all
-      render :new
+      @equipment = Equipment.available_for_rental
+      render :new, status: :unprocessable_entity
     end
   end
 
   def destroy
     @rental_item = @rental.rental_items.find(params[:id])
     @rental_item.destroy
-    puts "Rental item with ID #{@rental_item.id} has been deleted."
-    redirect_to new_rental_rental_item_path(@rental), notice: "Rental item was successfully deleted."
+    redirect_to new_rental_rental_item_path(@rental), notice: "Item removed from rental."
   end
 
   private

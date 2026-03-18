@@ -2,40 +2,33 @@ class RentalItem < ApplicationRecord
   belongs_to :rental
   belongs_to :equipment
 
-  validate :check_equipment_availability
+  validates :quantity, presence: true, numericality: { greater_than: 0 }
+  validates :daily_price, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validate :equipment_must_be_available, on: :create
 
-  after_save :update_rental_total_value, :update_equipment_status
-  after_destroy :update_rental_total_value, :update_equipment_status_when_delete
-
+  before_save :calculate_subtotal
+  after_save :update_rental_total_value
+  after_destroy :update_rental_total_value
 
   private
 
-  def check_equipment_availability
+  def equipment_must_be_available
     return unless equipment.present?
 
     unless equipment.available? || equipment.pending?
-      errors.add(:base, "is not available for rental")
+      errors.add(:base, "Equipment '#{equipment.name}' is not available for rental")
     end
+  end
+
+  def calculate_subtotal
+    return unless daily_price && quantity && rental
+
+    days = (rental.end_date - rental.start_date).to_i
+    days = 1 if days < 1
+    self.subtotal = daily_price * quantity * days
   end
 
   def update_rental_total_value
     rental.calculate_total_value!
-  end
-
-  def update_equipment_status_when_delete
-    equipment.update(status: :available)
-  end
-
-  def update_equipment_status
-    case rental.status
-    when "pending"
-      equipment.update(status: :pending)
-
-    when "active"
-      equipment.update(status: :rented)
-
-    when "completed", "cancelled"
-      equipment.update(status: :available)
-    end
   end
 end

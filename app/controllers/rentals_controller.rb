@@ -1,8 +1,8 @@
 class RentalsController < ApplicationController
   def index
-@rentals = Rental.all
-@rentals = @rentals.by_status(params[:status]) if params[:status].present?
-@rentals = @rentals.start_date(params[:start_date]) if params[:start_date].present?
+    @rentals = Rental.all
+    @rentals = @rentals.by_status(params[:status]) if params[:status].present?
+    @rentals = @rentals.by_start_date(params[:start_date]) if params[:start_date].present?
   end
 
   def show
@@ -25,15 +25,14 @@ class RentalsController < ApplicationController
     if @rental.save
       redirect_to rentals_path, notice: "Rental was successfully created."
     else
-      render "/login", status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
     @rental = Rental.find(params[:id])
-
     if @rental.update(rental_status_params)
-      redirect_to @rental, notice: "Status update confirmed."
+      redirect_to @rental, notice: "Status updated successfully."
     else
       render :show, status: :unprocessable_entity
     end
@@ -41,20 +40,17 @@ class RentalsController < ApplicationController
 
   def pdf
     @rental = Rental.find(params[:id])
-
-        render pdf: "rental_report",
-              template: "rentals/pdf",
-              layout: "pdf"
+    render pdf: "rental_report_#{@rental.id}",
+           template: "rentals/show_details_print",
+           layout: "pdf"
   end
 
   private
-  def rental_item_params
-  params.require(:rental_item).permit(:rental_id)
-  end
 
   def rental_status_params
     params.require(:rental).permit(:status)
   end
+
   def rental_params
     params.require(:rental).permit(:client_id, :event_id, :user_id, :start_date, :end_date, :total_value, :status)
   end

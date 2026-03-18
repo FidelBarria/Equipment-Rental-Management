@@ -2,8 +2,8 @@ class Rental < ApplicationRecord
   belongs_to :client
   belongs_to :event
   belongs_to :user
-  has_many :rental_items
-  has_many :payments
+  has_many :rental_items, dependent: :destroy
+  has_many :payments, dependent: :destroy
   has_many :equipment, through: :rental_items
 
   validates :event_id, presence: true, uniqueness: { message: "already has a rental associated" }
@@ -19,29 +19,28 @@ class Rental < ApplicationRecord
   after_update :update_equipment_status
 
   scope :by_status, ->(status) { where(status: status) }
-
-  scope :start_date, ->(start_date) { where(start_date: start_date, status: [ :pending, :active ]) }
+  scope :by_start_date, ->(date) { where(start_date: date, status: [ :pending, :active ]) }
 
   def calculate_total_value!
     update!(total_value: rental_items.sum(:subtotal))
   end
 
   def update_equipment_status
+    return unless saved_change_to_status?
+
     case status
     when "pending"
-      equipment.update(status: :pending)
-
+      equipment.update_all(status: :pending)
     when "active"
-      equipment.update(status: :unavailable)
-
+      equipment.update_all(status: :unavailable)
     when "completed", "cancelled"
-      equipment.update(status: :available)
+      equipment.update_all(status: :available)
     end
   end
 
   def end_date_after_start_date
-    if end_date && start_date && end_date < start_date
-      errors.add(:end_date, "must be after the start date")
-    end
+    return unless end_date && start_date
+
+    errors.add(:end_date, "must be after the start date") if end_date < start_date
   end
 end

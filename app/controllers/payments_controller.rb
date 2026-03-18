@@ -1,26 +1,26 @@
 class PaymentsController < ApplicationController
-  before_action :set_payment
+  before_action :set_rental
+
   def index
-    @payments = Payment.all
+    @payments = @rental.payments
   end
 
   def new
     @payment = @rental.payments.build
-    puts params.inspect
   end
 
   def create
     @payment = @rental.payments.build(payment_params)
     if @payment.save
-      redirect_to rentals_path, notice: "Payment was successfully created."
+      redirect_to @rental, notice: "Payment recorded successfully."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   private
 
-  def set_payment
+  def set_rental
     @rental = Rental.find(params[:rental_id])
   end
 
