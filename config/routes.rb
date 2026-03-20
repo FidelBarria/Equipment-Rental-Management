@@ -21,10 +21,6 @@ Rails.application.routes.draw do
 
   # Recursos Aninhados (Nested Resources)
   resources :rentals do
-    member do
-      get :pdf
-      get "show_details_print"
-    end
     resources :rental_items
     resources :payments
   end
